@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { t, type Lang } from '../i18n/ui';
+import { practice } from '../data/practice';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  noindex?: boolean;
+  /** URL of the same page in the other language, for hreflang and the switcher. */
+  alternateUrl?: string;
+}
+
+const { lang, title, description, noindex = false, alternateUrl } = Astro.props;
+const tr = t(lang);
+const fullTitle = `${title} | Psychotherapie ${practice.name.replace('Dr. ', '')}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const otherLang: Lang = lang === 'de' ? 'en' : 'de';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<!doctype html>
+<html lang={lang} data-theme="bausch">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    {alternateUrl && (
+      <link rel="alternate" hreflang={otherLang} href={new URL(alternateUrl, Astro.site)} />
+    )}
+    <link rel="icon" type="image/png" href={`${base}logo.png`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-base-100 text-base-content text-lg">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:p-2 focus:bg-base-100">
+      {tr('skip')}
+    </a>
+    <Header lang={lang} alternateUrl={alternateUrl} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

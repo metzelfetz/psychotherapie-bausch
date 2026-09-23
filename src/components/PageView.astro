@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { counterpart, langOf, urlFor, type Page } from '../i18n/pages';
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+const lang = langOf(page);
+const { Content } = await render(page);
+const other = await counterpart(page);
+const alternateUrl = other ? urlFor(lang === 'de' ? 'en' : 'de', other.data.slug) : undefined;
+const { hero } = page.data;
+---
+
+<BaseLayout
+  lang={lang}
+  title={page.data.title}
+  description={page.data.description}
+  noindex={page.data.layout === 'legal'}
+  alternateUrl={alternateUrl}
+>
+  {hero && (
+    <section class="mx-auto max-w-6xl px-4 py-8 grid gap-6 md:grid-cols-5 md:items-center">
+      <div class="md:col-span-2 rounded-box bg-primary text-primary-content p-8">
+        <h1 class="text-4xl font-bold mb-2">{hero.title}</h1>
+        {hero.lead && <p class="text-2xl mb-4">{hero.lead}</p>}
+        <p class="text-xl font-light">{hero.text}</p>
+      </div>
+      <div class="md:col-span-3">
+        <Image src={hero.image} alt={hero.imageAlt} widths={[480, 800, 1200]} sizes="(min-width: 768px) 60vw, 100vw" class="rounded-box w-full h-auto" />
+      </div>
+    </section>
+  )}
+  <div class="mx-auto max-w-6xl px-4 py-8">
+    <article class="prose prose-lg max-w-none">
+      {!hero && <h1>{page.data.title}</h1>}
+      <Content />
+    </article>
+  </div>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import { pagesFor, urlFor } from '../i18n/pages';
+import { t, type Lang } from '../i18n/ui';
+import { practice } from '../data/practice';
+
+interface Props {
+  lang: Lang;
+  alternateUrl?: string;
+}
+
+const { lang, alternateUrl } = Astro.props;
+const tr = t(lang);
+const navPages = (await pagesFor(lang)).filter((p) => p.data.nav);
+const current = Astro.url.pathname.replace(/\/?$/, '/');
+const otherLang: Lang = lang === 'de' ? 'en' : 'de';
+---
+
+<header class="navbar bg-base-100 px-4 md:px-8 border-b border-base-300">
+  <div class="flex-1">
+    <a href={urlFor(lang, '')} class="text-xl font-light tracking-wide">{practice.name}</a>
+  </div>
+  <nav aria-label={tr('nav.label')} class="flex-none">
+    <ul class="menu menu-horizontal gap-1 hidden md:flex">
+      {navPages.map((p) => {
+        const href = urlFor(lang, p.data.slug);
+        return (
+          <li>
+            <a href={href} aria-current={href === current ? 'page' : undefined}>
+              {p.data.title}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+  {alternateUrl && (
+    <a href={alternateUrl} hreflang={otherLang} lang={otherLang} class="btn btn-ghost btn-sm uppercase" aria-label={tr('lang.switch')}>
+      {otherLang}
+    </a>
+  )}
+</header>

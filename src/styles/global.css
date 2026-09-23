@@ -1,0 +1,35 @@
+@import "@fontsource-variable/nunito";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+  themes: false;
+}
+
+/* The single place to change the brand colour (v1 blue). */
+@plugin "daisyui/theme" {
+  name: "bausch";
+  default: true;
+  color-scheme: light;
+  --color-primary: #3498db;
+  --color-primary-content: #ffffff;
+  --color-base-100: #ffffff;
+  --color-base-200: #f5f8fb;
+  --color-base-300: #e6edf3;
+  --color-base-content: #383e42;
+  --color-secondary: #383e42;
+  --color-secondary-content: #ffffff;
+  --color-accent: #3498db;
+  --color-accent-content: #ffffff;
+  --color-neutral: #383e42;
+  --color-neutral-content: #ffffff;
+  --radius-selector: 2rem;
+  --radius-field: 2rem;
+  --radius-box: 1rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-sans: "Nunito Variable", ui-sans-serif, system-ui, sans-serif;
+}

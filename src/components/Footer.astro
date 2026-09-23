@@ -1,0 +1,25 @@
+---
+import { practice } from '../data/practice';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+---
+
+<footer class="bg-primary text-primary-content px-6 py-12 md:px-12">
+  <div class="mx-auto max-w-6xl grid gap-8 md:grid-cols-2">
+    <address class="not-italic">
+      <p class="text-2xl font-light mb-2">{practice.name}</p>
+      <p>{practice.practiceName[lang]}</p>
+      <p>{practice.street}<br />{practice.postalCode} {practice.city}<br />{practice.country[lang]}</p>
+    </address>
+    <div class="text-xl">
+      <p>{tr('footer.phone')}: <a class="link" href={practice.phone.href}>{practice.phone.display}</a></p>
+      <p>{tr('footer.email')}: <a class="link" href={`mailto:${practice.email}`}>{practice.email}</a></p>
+    </div>
+  </div>
+</footer>
