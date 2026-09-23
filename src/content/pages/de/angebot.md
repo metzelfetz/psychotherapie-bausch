@@ -17,6 +17,9 @@ highlights:
     items: [Depressionen, Burnout, Angsterkrankungen, Zwänge, Traumafolgestörungen]
   - label: Verfahren
     items: [Verhaltenstherapie, Schematherapie, CBASP, ACT]
+band:
+  image: ../../../assets/Ablauf_2.jpg
+  imageAlt: Pflanze, Stehlampe und Sessel in den Praxisräumen
 ---
 
 Den Fokus meiner beruflichen Expertise bildet die Behandlung von Depressionen, Burnout, Angsterkrankungen, Zwängen und Traumafolgestörungen. Hier kann ich Ihnen aufgrund meiner reichhaltigen klinischen und wissenschaftlichen Erfahrung eine fundierte und kompetente Begleitung anbieten. Zentrale Stationen meiner beruflichen Laufbahn bilden das Universitätsklinikum Freiburg, die Celenus Psychosomatische Fachklinik Freiburg und die mehrjährige selbständige Tätigkeit in ambulanter Praxis.

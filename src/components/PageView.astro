@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from './Hero.astro';
@@ -21,7 +22,7 @@ const tr = t(lang);
 const { Content } = await render(page);
 const other = await counterpart(page);
 const alternateUrl = other ? urlFor(lang === 'de' ? 'en' : 'de', other.data.slug) : undefined;
-const { hero, cv, trainings, highlights, aside, showMap, cta, layout } = page.data;
+const { hero, cv, trainings, highlights, aside, band, showMap, cta, layout } = page.data;
 
 // The home page's eyebrow names the practice; other pages use their title.
 const isHome = page.data.slug === '';
@@ -82,6 +83,20 @@ const hasAside = groups.length > 0 || aside !== undefined;
         <section class="px-4 pt-14 md:pt-24">
           <div class="mx-auto max-w-6xl">
             <Map lang={lang} />
+          </div>
+        </section>
+      )}
+
+      {band && (
+        <section class="px-4 pt-14 md:pt-24">
+          <div class="reveal mx-auto max-w-6xl">
+            <Image
+              src={band.image}
+              alt={band.imageAlt}
+              widths={[640, 1200, 1800, 2400]}
+              sizes="(min-width: 72rem) 72rem, 100vw"
+              class="aspect-[4/3] w-full rounded-[2rem] object-cover object-[35%_center] md:aspect-[21/9]"
+            />
           </div>
         </section>
       )}

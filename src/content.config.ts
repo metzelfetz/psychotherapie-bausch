@@ -43,6 +43,8 @@ const pages = defineCollection({
       highlights: z.array(z.object({ label: z.string(), items: z.array(z.string()) })).optional(),
       // Practice facts shown beside the text (from src/data/practice.ts).
       aside: z.enum(['contact', 'address']).optional(),
+      // Wide mood photo between the text and the contact box.
+      band: z.object({ image: image(), imageAlt: z.string() }).optional(),
       showMap: z.boolean().default(false),
       // Closing sentence of the page, shown in the contact box with the
       // mailto button and phone number. No box when it is missing.
