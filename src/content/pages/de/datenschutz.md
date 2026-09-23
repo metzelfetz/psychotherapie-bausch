@@ -27,7 +27,7 @@ Diese Internetseite wird als statische Seite bei GitHub Pages (GitHub, Inc., 88 
 
 ## Schriftarten
 
-Diese Internetseite verwendet die Schriftart Nunito. Die Schriftdatei liegt lokal auf dem Server und wird direkt mit der Seite ausgeliefert; es findet keine Verbindung zu Google Fonts oder einem anderen externen Schriftanbieter statt.
+Diese Internetseite verwendet die Schriftarten Newsreader und Source Sans 3. Die Schriftdateien liegen lokal auf dem Server und werden direkt mit der Seite ausgeliefert; es findet keine Verbindung zu Google Fonts oder einem anderen externen Schriftanbieter statt.
 
 ## Karte auf "Gut ankommen"
 
