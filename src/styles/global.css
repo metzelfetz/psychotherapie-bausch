@@ -1,46 +1,324 @@
-@import "@fontsource-variable/nunito";
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
+@import "@fontsource-variable/source-sans-3/wght.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
   themes: false;
 }
 
-/* The single place to change the brand colour (v1 blue). */
+/*
+ * The single place to change the colours. WCAG contrast ratios are noted
+ * against base-100 unless stated otherwise; keep text pairs at 4.5:1 or more.
+ */
 @plugin "daisyui/theme" {
   name: "bausch";
   default: true;
   color-scheme: light;
-  --color-primary: #3498db;
+  --color-primary: #5a6b4a;          /* sage-olive, 5.2:1; white on it 5.8:1 */
   --color-primary-content: #ffffff;
-  --color-base-100: #ffffff;
-  --color-base-200: #f5f8fb;
-  --color-base-300: #e6edf3;
-  --color-base-content: #383e42;
-  --color-secondary: #383e42;
-  --color-secondary-content: #ffffff;
-  --color-accent: #3498db;
-  --color-accent-content: #ffffff;
-  --color-neutral: #383e42;
-  --color-neutral-content: #ffffff;
+  --color-base-100: #f6f3ec;         /* warm off-white page background */
+  --color-base-200: #efe9dd;         /* alternate section background */
+  --color-base-300: #ddd5c6;         /* hairlines and borders */
+  --color-base-content: #2e2c28;     /* 12.6:1 */
+  --color-secondary: #e9dfcb;        /* sand panels, chips */
+  --color-secondary-content: #4a5a3c; /* dark olive, 6.7:1 on base-100, 5.6:1 on sand */
+  --color-accent: #c9b58e;           /* deep sand, decoration only (3.8:1) */
+  --color-accent-content: #2e2c28;
+  --color-neutral: #2f3a2a;          /* deep olive footer; base-100 on it 10.8:1 */
+  --color-neutral-content: #c9d1b8;  /* muted footer text, 7.6:1 on neutral */
   --radius-selector: 2rem;
   --radius-field: 2rem;
-  --radius-box: 1rem;
+  --radius-box: 1.25rem;
   --border: 1px;
   --depth: 0;
   --noise: 0;
 }
 
 @theme {
-  --font-sans: "Nunito Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Source Sans 3 Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader Variable", Georgia, ui-serif, serif;
+  /* Muted body text, 5.2:1 on base-100. */
+  --color-muted: #6b665c;
 }
 
-/* Header colour change on scroll (see Header.astro's scroll listener). */
-#site-header.scrolled {
-  background-color: var(--color-primary);
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 380;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+  }
+}
+
+@layer components {
+  /* Small uppercase label with a leading rule. */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-secondary-content);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+  }
+  @media (max-width: 47.99rem) {
+    .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+    .eyebrow::before {
+      width: 1.25rem;
+    }
+  }
+
+  /* Header nav links: underline grows in on hover. */
+  .nav-link {
+    padding: 0.4rem 0.7rem;
+    border-radius: 99px;
+    text-decoration: none;
+    background-image: linear-gradient(var(--color-primary), var(--color-primary));
+    background-size: 0 1px;
+    background-position: 0.7rem calc(100% - 0.35rem);
+    background-repeat: no-repeat;
+    transition: background-size 0.25s ease;
+  }
+  .nav-link:hover {
+    background-size: calc(100% - 1.4rem) 1px;
+  }
+  .nav-link[aria-current="page"] {
+    color: var(--color-secondary-content);
+    font-weight: 600;
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+  a:hover > .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Landscape hero photo: arch-topped, with a sand shape behind it. */
+  .photo-frame {
+    position: relative;
+    isolation: isolate;
+  }
+  .photo-frame::before {
+    content: "";
+    position: absolute;
+    inset: 12% -4% -6% 10%;
+    z-index: -1;
+    background: var(--color-secondary);
+    border-radius: 50% 50% var(--radius-box) var(--radius-box) / 30% 30% var(--radius-box) var(--radius-box);
+  }
+  .photo-frame img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 10rem 10rem var(--radius-box) var(--radius-box) / 7rem 7rem var(--radius-box) var(--radius-box);
+  }
+
+  /* Cut-out portrait standing in front of a sage arch. */
+  .portrait-frame {
+    position: relative;
+    isolation: isolate;
+  }
+  .portrait-frame::before {
+    content: "";
+    position: absolute;
+    inset: 14% 6% 0 6%;
+    z-index: -1;
+    background: linear-gradient(170deg, #7d8c69, var(--color-primary));
+    border-radius: 999px 999px var(--radius-box) var(--radius-box);
+  }
+  .portrait-frame::after {
+    content: "";
+    position: absolute;
+    left: -1rem;
+    top: 22%;
+    z-index: -1;
+    width: 5.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-accent);
+    opacity: 0.55;
+  }
+
+  .chip {
+    padding: 0.45rem 0.85rem;
+    border-radius: 99px;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    background: var(--color-secondary);
+    color: var(--color-secondary-content);
+  }
+
+  /* CV timeline: period column, a hairline and a dot per entry. */
+  .timeline-cv {
+    --period: 11rem;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .timeline-cv::before {
+    content: "";
+    position: absolute;
+    left: var(--period);
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: 1px;
+    background: var(--color-base-300);
+  }
+  .timeline-cv > li {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--period) 1fr;
+    gap: 0 2.25rem;
+    padding-bottom: 1.9rem;
+  }
+  .timeline-cv > li::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--period) - 5px);
+    top: 0.55rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--color-base-100);
+    border: 2px solid var(--color-primary);
+  }
+  .timeline-cv > li.current::before {
+    background: var(--color-primary);
+  }
+  .timeline-cv a {
+    color: var(--color-secondary-content);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 39.99rem) {
+    .timeline-cv::before {
+      left: 5px;
+    }
+    .timeline-cv > li {
+      grid-template-columns: 1fr;
+      padding-left: 2rem;
+    }
+    .timeline-cv > li::before {
+      left: 0;
+    }
+  }
+}
+
+/* Long-form text: Tailwind Typography tuned to the theme. */
+.prose {
+  --tw-prose-body: var(--color-base-content);
+  --tw-prose-headings: var(--color-base-content);
+  --tw-prose-bold: var(--color-base-content);
+  --tw-prose-links: var(--color-secondary-content);
+  --tw-prose-bullets: var(--color-accent);
+  line-height: 1.7;
+}
+.prose :where(a) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+  font-weight: inherit;
+  overflow-wrap: anywhere;
+  transition: text-decoration-color 0.2s, text-underline-offset 0.2s;
+}
+.prose :where(a):hover {
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 0.3em;
+}
+.prose-lead > p:first-child {
+  font-size: 1.3em;
+  line-height: 1.6;
+}
+/* A list where every item holds an external link renders as link cards
+   (e.g. the publications links on the home page). */
+.prose ul:not(:has(> li:not(:has(a[href^="http"])))) {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+.prose ul:not(:has(> li:not(:has(a[href^="http"])))) > li {
+  margin: 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--color-base-300);
+  border-radius: 1rem;
+  background: var(--color-base-100);
+  font-size: 0.85em;
+  line-height: 1.4;
+  color: var(--color-muted);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.prose ul:not(:has(> li:not(:has(a[href^="http"])))) > li:hover {
   border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+.prose ul:not(:has(> li:not(:has(a[href^="http"])))) > li::marker {
+  content: none;
+}
+.prose ul:not(:has(> li:not(:has(a[href^="http"])))) a {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--font-serif);
+  font-size: 1.3em;
+  text-decoration: none;
+}
+.prose ul:not(:has(> li:not(:has(a[href^="http"])))) a::after {
+  content: " ↗";
 }
 
-#site-header.scrolled a,
-#site-header.scrolled svg {
-  color: var(--color-primary-content);
+/* Header gets a hairline once the page scrolls (see Header.astro). */
+#site-header.scrolled {
+  border-bottom-color: var(--color-base-300);
+}
+
+/* Motion: a short rise on the hero, scroll-driven reveals elsewhere. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > * {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero-copy > :nth-child(2) { animation-delay: 0.06s; }
+  .hero-copy > :nth-child(3) { animation-delay: 0.12s; }
+  .hero-copy > :nth-child(4) { animation-delay: 0.18s; }
+  .hero-copy > :nth-child(5) { animation-delay: 0.24s; }
+  .hero-media {
+    animation: fade 1.1s ease both 0.15s;
+  }
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

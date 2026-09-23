@@ -1,7 +1,7 @@
 ---
 import { pagesFor, urlFor } from '../i18n/pages';
-import { t, type Lang } from '../i18n/ui';
-import { practice } from '../data/practice';
+import { languages, t, type Lang } from '../i18n/ui';
+import { mailto, practice } from '../data/practice';
 
 interface Props {
   lang: Lang;
@@ -13,78 +13,85 @@ const tr = t(lang);
 const navPages = (await pagesFor(lang)).filter((p) => p.data.nav);
 const current = Astro.url.pathname.replace(/\/?$/, '/');
 const otherLang: Lang = lang === 'de' ? 'en' : 'de';
+const tagline = practice.tagline[lang].replace(' | ', ' · ');
 ---
 
 <header
   id="site-header"
-  class="navbar sticky top-0 z-50 relative bg-base-100 px-4 md:px-8 border-b border-base-300 transition-colors duration-300"
+  class="sticky top-0 z-50 border-b border-transparent bg-base-100/85 backdrop-blur-md transition-colors duration-300"
 >
-  <div class="flex-1">
-    <a href={urlFor(lang, '')} class="text-xl font-light tracking-wide">{practice.name}</a>
-  </div>
+  <div class="relative mx-auto flex min-h-15 max-w-6xl items-center gap-6 px-4 md:min-h-18">
+    <a href={urlFor(lang, '')} class="mr-auto leading-tight no-underline">
+      <span class="block font-serif text-xl font-[450] tracking-tight md:text-2xl">{practice.name}</span>
+      <span class="block whitespace-nowrap text-[0.7rem] text-muted md:text-[0.8rem] md:tracking-wide">{tagline}</span>
+    </a>
 
-  <!-- Checkbox-driven mobile menu: no client JS needed to open or close it. -->
-  <input type="checkbox" id="nav-toggle" class="peer hidden" />
+    <!-- Checkbox-driven mobile menu: no client JS needed to open or close it. -->
+    <input type="checkbox" id="nav-toggle" class="peer hidden" />
 
-  <nav aria-label={tr('nav.label')} class="flex-none hidden md:block">
-    <ul class="menu menu-horizontal gap-1">
+    <nav aria-label={tr('nav.label')} class="hidden items-center gap-1 lg:flex">
       {navPages.map((p) => {
         const href = urlFor(lang, p.data.slug);
         return (
-          <li>
-            <a href={href} aria-current={href === current ? 'page' : undefined}>
-              {p.data.title}
-            </a>
-          </li>
-        );
-      })}
-    </ul>
-  </nav>
-
-  {alternateUrl && (
-    <a
-      href={alternateUrl}
-      hreflang={otherLang}
-      lang={otherLang}
-      class="btn btn-ghost btn-sm uppercase hidden md:inline-flex"
-      aria-label={tr('lang.switch')}
-    >
-      {otherLang}
-    </a>
-  )}
-
-  <label for="nav-toggle" class="btn btn-square btn-ghost md:hidden" aria-label={tr('menu.open')}>
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  </label>
-
-  <ul class="menu absolute inset-x-0 top-full hidden w-full flex-col gap-1 border-b border-base-300 bg-base-100 p-4 peer-checked:flex md:hidden">
-    {navPages.map((p) => {
-      const href = urlFor(lang, p.data.slug);
-      return (
-        <li>
-          <a href={href} aria-current={href === current ? 'page' : undefined}>
+          <a href={href} class="nav-link" aria-current={href === current ? 'page' : undefined}>
             {p.data.title}
           </a>
-        </li>
-      );
-    })}
-    {alternateUrl && (
-      <li>
-        <a href={alternateUrl} hreflang={otherLang} lang={otherLang} class="uppercase" aria-label={tr('lang.switch')}>
+        );
+      })}
+      {alternateUrl && (
+        <a
+          href={alternateUrl}
+          hreflang={otherLang}
+          lang={otherLang}
+          class="nav-link text-sm uppercase tracking-widest text-muted"
+          aria-label={tr('lang.switch')}
+        >
           {otherLang}
         </a>
-      </li>
-    )}
-  </ul>
+      )}
+    </nav>
+    <a href={mailto(lang)} class="btn btn-primary btn-sm hidden lg:inline-flex">{tr('nav.cta')}</a>
+
+    <label for="nav-toggle" class="btn btn-square btn-ghost lg:hidden" aria-label={tr('menu.open')}>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M4 8h16M4 16h16" />
+      </svg>
+    </label>
+
+    <div class="absolute inset-x-0 top-full hidden flex-col border-b border-base-300 bg-base-100 px-4 pt-2 pb-6 peer-checked:flex lg:hidden">
+      {navPages.map((p) => {
+        const href = urlFor(lang, p.data.slug);
+        return (
+          <a
+            href={href}
+            class="border-b border-base-300 px-2 py-3 text-lg aria-[current=page]:font-semibold aria-[current=page]:text-secondary-content"
+            aria-current={href === current ? 'page' : undefined}
+          >
+            {p.data.title}
+          </a>
+        );
+      })}
+      {alternateUrl && (
+        <a
+          href={alternateUrl}
+          hreflang={otherLang}
+          lang={otherLang}
+          class="border-b border-base-300 px-2 py-3 text-lg"
+          aria-label={tr('lang.switch')}
+        >
+          {languages[otherLang]}
+        </a>
+      )}
+      <a href={mailto(lang)} class="btn btn-primary mt-4">{tr('nav.cta')}</a>
+    </div>
+  </div>
 </header>
 
 <script>
-  // Tiny vanilla scroll listener: replaces v1's jQuery navbar-colour script (script.js).
+  // Adds a hairline under the header once the page scrolls.
   const header = document.getElementById('site-header');
   if (header) {
-    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
     onScroll();
     document.addEventListener('scroll', onScroll, { passive: true });
   }
