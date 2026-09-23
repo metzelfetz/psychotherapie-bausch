@@ -1,12 +1,15 @@
 ---
-import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from './Hero.astro';
 import Prose from './Prose.astro';
+import Aside from './Aside.astro';
 import ContactCTA from './ContactCTA.astro';
-import CvTable from './CvTable.astro';
+import CvTimeline from './CvTimeline.astro';
 import Map from './Map.astro';
-import { counterpart, langOf, urlFor, type Page } from '../i18n/pages';
+import { practice } from '../data/practice';
+import { counterpart, langOf, pagesFor, urlFor, type Page } from '../i18n/pages';
+import { t } from '../i18n/ui';
 
 interface Props {
   page: Page;
@@ -14,38 +17,82 @@ interface Props {
 
 const { page } = Astro.props;
 const lang = langOf(page);
+const tr = t(lang);
 const { Content } = await render(page);
 const other = await counterpart(page);
 const alternateUrl = other ? urlFor(lang === 'de' ? 'en' : 'de', other.data.slug) : undefined;
-const { hero, cv, trainings, showMap } = page.data;
+const { hero, cv, trainings, highlights, aside, showMap, cta, layout } = page.data;
+
+// The home page's eyebrow names the practice; other pages use their title.
+const isHome = page.data.slug === '';
+const eyebrow = isHome ? `${practice.practiceName[lang]} · ${practice.cityLong[lang]}` : page.data.title;
+
+// The hero's secondary link points to the next page in the navigation.
+const navPages = (await pagesFor(lang)).filter((p) => p.data.nav);
+const nextPage = navPages[navPages.findIndex((p) => p.id === page.id) + 1];
+const next = nextPage && { href: urlFor(lang, nextPage.data.slug), title: nextPage.data.title };
+
+const groups = [
+  ...(highlights ?? []),
+  ...(trainings?.length ? [{ label: tr('cv.trainings'), items: trainings }] : []),
+];
+const hasAside = groups.length > 0 || aside !== undefined;
 ---
 
 <BaseLayout
   lang={lang}
   title={page.data.title}
   description={page.data.description}
-  noindex={page.data.layout === 'legal'}
+  noindex={layout === 'legal'}
   alternateUrl={alternateUrl}
 >
-  {hero && (
-    <section class="mx-auto max-w-6xl px-4 py-8 grid gap-6 md:grid-cols-5 md:items-center">
-      <div class="md:col-span-2 rounded-box bg-primary text-primary-content p-8">
-        <h1 class="text-4xl font-bold mb-2">{hero.title}</h1>
-        {hero.lead && <p class="text-2xl mb-4">{hero.lead}</p>}
-        <p class="text-xl font-light">{hero.text}</p>
-      </div>
-      <div class="md:col-span-3">
-        <Image src={hero.image} alt={hero.imageAlt} widths={[480, 800, 1200]} sizes="(min-width: 768px) 60vw, 100vw" class="rounded-box w-full h-auto" />
+  {hero && <Hero lang={lang} eyebrow={eyebrow} {...hero} next={next} />}
+
+  {layout === 'legal' ? (
+    <section class="px-4 pt-12 pb-20 md:pt-20">
+      <div class="mx-auto max-w-6xl">
+        <Prose>
+          <h1 class="!font-[380] text-[clamp(2.4rem,4.6vw,3.6rem)]">{page.data.title}</h1>
+          <Content />
+        </Prose>
       </div>
     </section>
+  ) : (
+    <>
+      <section class="bg-base-200 px-4 py-14 md:py-24">
+        <div class:list={['mx-auto max-w-6xl', { 'grid gap-12 md:grid-cols-[minmax(0,40rem)_minmax(0,18rem)] md:justify-between md:gap-16': hasAside }]}>
+          <Prose lead>
+            {!hero && <h1>{page.data.title}</h1>}
+            <Content />
+          </Prose>
+          {hasAside && <Aside lang={lang} groups={groups} facts={aside} />}
+        </div>
+      </section>
+
+      {cv && (
+        <section class="px-4 pt-14 md:pt-24">
+          <div class="mx-auto max-w-6xl">
+            <p class="eyebrow reveal mb-10">{tr('cv.heading')}</p>
+            <CvTimeline cv={cv} />
+          </div>
+        </section>
+      )}
+
+      {showMap && (
+        <section class="px-4 pt-14 md:pt-24">
+          <div class="mx-auto max-w-6xl">
+            <Map lang={lang} />
+          </div>
+        </section>
+      )}
+
+      {cta && (
+        <section class="px-4 py-14 md:py-24">
+          <div class="mx-auto max-w-6xl">
+            <ContactCTA lang={lang} text={cta} />
+          </div>
+        </section>
+      )}
+    </>
   )}
-  <div class="mx-auto max-w-6xl px-4 py-8 flex flex-col gap-8">
-    <Prose>
-      {!hero && <h1>{page.data.title}</h1>}
-      <Content />
-    </Prose>
-    {cv && <CvTable cv={cv} trainings={trainings} />}
-    {showMap && <Map lang={lang} />}
-    {page.data.cta && <ContactCTA lang={lang} />}
-  </div>
 </BaseLayout>

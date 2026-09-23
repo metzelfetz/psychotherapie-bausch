@@ -1,0 +1,22 @@
+---
+interface Entry {
+  period: string;
+  text: string;
+  current?: boolean;
+}
+
+interface Props {
+  cv: Entry[];
+}
+
+const { cv } = Astro.props;
+---
+
+<ol class="timeline-cv reveal max-w-[50rem]">
+  {cv.map((row) => (
+    <li class:list={{ current: row.current }}>
+      <span class="pt-0.5 pr-4 text-[0.9rem] leading-snug text-muted">{row.period}</span>
+      <span class="leading-normal" set:html={row.text} />
+    </li>
+  ))}
+</ol>

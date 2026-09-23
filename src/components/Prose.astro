@@ -1,8 +1,13 @@
 ---
-// Wraps page content in Tailwind Typography, laid out as 2 columns on wide
-// screens (v1's `columns: 2 400px`), 1 column below that.
+// Long-form page text: one column at a readable measure (Tailwind Typography,
+// tuned in global.css). `lead` enlarges the first paragraph.
+interface Props {
+  lead?: boolean;
+}
+
+const { lead = false } = Astro.props;
 ---
 
-<article class="prose prose-lg max-w-none lg:columns-2 lg:gap-12">
+<article class:list={['prose prose-lg reveal max-w-[40rem]', { 'prose-lead': lead }]}>
   <slot />
 </article>

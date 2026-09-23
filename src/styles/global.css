@@ -234,6 +234,7 @@
   --tw-prose-bold: var(--color-base-content);
   --tw-prose-links: var(--color-secondary-content);
   --tw-prose-bullets: var(--color-accent);
+  font-size: 1.1875rem;
   line-height: 1.7;
 }
 .prose :where(a) {
@@ -249,18 +250,23 @@
   text-underline-offset: 0.3em;
 }
 .prose-lead > p:first-child {
-  font-size: 1.3em;
+  font-size: 1.15em;
   line-height: 1.6;
 }
-/* A list where every item holds an external link renders as link cards
-   (e.g. the publications links on the home page). */
-.prose ul:not(:has(> li:not(:has(a[href^="http"])))) {
+@media (max-width: 47.99rem) {
+  .prose-lead > p:first-child {
+    font-size: 1.05em;
+  }
+}
+/* On content pages (not legal ones), a list of external links renders as
+   link cards, e.g. the publications links on the home page. */
+.prose-lead ul:has(> li > a[href^="http"]) {
   display: grid;
   gap: 0.75rem;
   padding: 0;
   list-style: none;
 }
-.prose ul:not(:has(> li:not(:has(a[href^="http"])))) > li {
+.prose-lead ul:has(> li > a[href^="http"]) > li {
   margin: 0;
   padding: 1rem 1.15rem;
   border: 1px solid var(--color-base-300);
@@ -271,21 +277,21 @@
   color: var(--color-muted);
   transition: border-color 0.2s, transform 0.2s;
 }
-.prose ul:not(:has(> li:not(:has(a[href^="http"])))) > li:hover {
+.prose-lead ul:has(> li > a[href^="http"]) > li:hover {
   border-color: var(--color-primary);
   transform: translateY(-2px);
 }
-.prose ul:not(:has(> li:not(:has(a[href^="http"])))) > li::marker {
+.prose-lead ul:has(> li > a[href^="http"]) > li::marker {
   content: none;
 }
-.prose ul:not(:has(> li:not(:has(a[href^="http"])))) a {
+.prose-lead ul:has(> li > a[href^="http"]) a {
   display: block;
   margin-top: 0.2rem;
   font-family: var(--font-serif);
   font-size: 1.3em;
   text-decoration: none;
 }
-.prose ul:not(:has(> li:not(:has(a[href^="http"])))) a::after {
+.prose-lead ul:has(> li > a[href^="http"]) a::after {
   content: " ↗";
 }
 

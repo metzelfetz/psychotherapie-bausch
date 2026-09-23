@@ -1,0 +1,46 @@
+---
+// Side panel next to the page text: tag groups and/or practice facts.
+import { practice } from '../data/practice';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  groups: { label: string; items: string[] }[];
+  facts?: 'contact' | 'address';
+}
+
+const { lang, groups, facts } = Astro.props;
+const tr = t(lang);
+// Lets a narrow column wrap the address after the @, not mid-word.
+const emailParts = practice.email.split('@');
+const labelClass = 'mb-3.5 text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-muted';
+const linkClass = 'text-secondary-content underline decoration-primary/45 underline-offset-4 hover:decoration-primary';
+---
+
+<aside class="reveal flex flex-col gap-9 self-start md:sticky md:top-28">
+  {groups.map((g) => (
+    <div>
+      <p class={labelClass}>{g.label}</p>
+      <ul class="flex flex-wrap gap-2">
+        {g.items.map((item) => <li class="chip">{item}</li>)}
+      </ul>
+    </div>
+  ))}
+  {facts === 'contact' && (
+    <div class="rounded-box border border-base-300 bg-base-100 p-6">
+      <p class={labelClass}>{tr('footer.contact')}</p>
+      <p class="mb-1">{tr('footer.phone')}: <a class={linkClass} href={practice.phone.href}>{practice.phone.display}</a></p>
+      <p>{tr('footer.email')}: <a class={linkClass} href={`mailto:${practice.email}`}>{emailParts[0]}@<wbr />{emailParts[1]}</a></p>
+    </div>
+  )}
+  {facts === 'address' && (
+    <div class="rounded-box border border-base-300 bg-base-100 p-6">
+      <p class={labelClass}>{tr('address.heading')}</p>
+      <address class="not-italic leading-relaxed">
+        {practice.name}<br />
+        {practice.street}<br />
+        {practice.postalCode} {practice.city}
+      </address>
+    </div>
+  )}
+</aside>

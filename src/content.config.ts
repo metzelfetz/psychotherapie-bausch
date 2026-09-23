@@ -23,13 +23,30 @@ const pages = defineCollection({
           text: z.string(),
           image: image(),
           imageAlt: z.string(),
+          // 'photo': landscape photo in an arch. 'portrait': a cut-out portrait
+          // (transparent PNG) standing in front of a sage arch.
+          variant: z.enum(['photo', 'portrait']).default('photo'),
         })
         .optional(),
-      cv: z.array(z.object({ period: z.string(), text: z.string() })).optional(),
+      cv: z
+        .array(
+          z.object({
+            period: z.string(),
+            text: z.string(),
+            // Ongoing position: drawn with a filled timeline dot.
+            current: z.boolean().default(false),
+          }),
+        )
+        .optional(),
       trainings: z.array(z.string()).optional(),
+      // Tag groups shown beside the text. They repeat terms from the text.
+      highlights: z.array(z.object({ label: z.string(), items: z.array(z.string()) })).optional(),
+      // Practice facts shown beside the text (from src/data/practice.ts).
+      aside: z.enum(['contact', 'address']).optional(),
       showMap: z.boolean().default(false),
-      // Shows the mailto "Email senden" button below the prose.
-      cta: z.boolean().default(false),
+      // Closing sentence of the page, shown in the contact box with the
+      // mailto button and phone number. No box when it is missing.
+      cta: z.string().optional(),
     }),
 });
 

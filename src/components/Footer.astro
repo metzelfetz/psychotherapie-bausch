@@ -9,6 +9,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const tr = t(lang);
+// Lets a narrow column wrap the address after the @, not mid-word.
+const emailParts = practice.email.split('@');
 const pages = await pagesFor(lang);
 const navPages = pages.filter((p) => p.data.nav);
 const legalPages = pages.filter((p) => p.data.layout === 'legal');
@@ -31,7 +33,7 @@ const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:dec
       <div>
         <p class={labelClass}>{tr('footer.contact')}</p>
         <p class="mb-1">{tr('footer.phone')}: <a class={linkClass} href={practice.phone.href}>{practice.phone.display}</a></p>
-        <p class="break-words">{tr('footer.email')}: <a class={linkClass} href={`mailto:${practice.email}`}>{practice.email}</a></p>
+        <p>{tr('footer.email')}: <a class={linkClass} href={`mailto:${practice.email}`}>{emailParts[0]}@<wbr />{emailParts[1]}</a></p>
       </div>
       <nav aria-label={tr('footer.pages')}>
         <p class={labelClass}>{tr('footer.pages')}</p>
@@ -48,9 +50,11 @@ const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:dec
         <path d="M12 21s-7-4.4-9.3-9A5.3 5.3 0 0 1 12 6.6 5.3 5.3 0 0 1 21.3 12C19 16.6 12 21 12 21z" />
       </svg>
       <p>
-        <strong class="font-semibold text-base-100">{tr('crisis.title')}</strong>
-        {tr('crisis.emergency')} <a class={`${linkClass} whitespace-nowrap font-semibold text-base-100`} href={crisisLines.emergency.href}>{crisisLines.emergency.display}</a>
-        {tr('crisis.hotline')} <a class={`${linkClass} whitespace-nowrap font-semibold text-base-100`} href={crisisLines.telefonSeelsorge.href}>{crisisLines.telefonSeelsorge.display}</a>.
+        <strong class="font-semibold text-base-100">{tr('crisis.title')}</strong>{' '}
+        {tr('crisis.emergency')}{' '}
+        <a class={`${linkClass} whitespace-nowrap font-semibold text-base-100`} href={crisisLines.emergency.href}>{crisisLines.emergency.display}</a>{' '}
+        {tr('crisis.hotline')}{' '}
+        <a class={`${linkClass} whitespace-nowrap font-semibold text-base-100`} href={crisisLines.telefonSeelsorge.href}>{crisisLines.telefonSeelsorge.display}</a>.
       </p>
     </div>
 

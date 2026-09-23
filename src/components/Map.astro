@@ -13,14 +13,20 @@ const { lang } = Astro.props;
 const tr = t(lang);
 ---
 
-<div class="not-prose my-8">
-  <div id="map-consent" class="rounded-box border border-base-300 bg-base-200 p-8 text-center">
-    <p class="mb-4">{tr('map.consent')}</p>
+<div class="reveal">
+  <div
+    id="map-consent"
+    class="flex min-h-72 flex-col items-center justify-center gap-5 rounded-[2rem] border border-base-300 bg-base-200 p-8 text-center"
+  >
+    <svg class="h-9 w-9 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.3" />
+    </svg>
+    <p class="max-w-md text-muted">{tr('map.consent')}</p>
     <button id="map-load-btn" type="button" class="btn btn-primary">{tr('map.load')}</button>
   </div>
   <div
     id="map-container"
-    class="hidden h-96 w-full rounded-box"
+    class="hidden h-[26rem] w-full overflow-hidden rounded-[2rem]"
     data-lat={practice.geo.lat}
     data-lng={practice.geo.lng}
     aria-label={tr('map.alt')}

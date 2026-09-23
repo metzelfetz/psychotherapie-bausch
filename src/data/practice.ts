@@ -12,6 +12,7 @@ export const practice = {
   street: 'Bußstraße 17',
   postalCode: '79102',
   city: 'Freiburg',
+  cityLong: { de: 'Freiburg i.Br.', en: 'Freiburg im Breisgau' },
   country: { de: 'Deutschland', en: 'Germany' },
   phone: {
     href: 'tel:+4915786444932',

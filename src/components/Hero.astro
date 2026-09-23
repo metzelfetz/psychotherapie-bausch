@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { mailto } from '../data/practice';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  eyebrow: string;
+  title: string;
+  lead?: string;
+  text: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  variant: 'photo' | 'portrait';
+  /** Secondary link to the next page in the navigation. */
+  next?: { href: string; title: string };
+}
+
+const { lang, eyebrow, title, lead, text, image, imageAlt, variant, next } = Astro.props;
+const tr = t(lang);
+// A title ending in a comma ("Schön,") continues into the lead, so both
+// share one headline; otherwise the lead is its own line below it.
+const leadInline = lead && title.trimEnd().endsWith(',');
+---
+
+<section class="px-4 pt-10 pb-12 md:pt-20 md:pb-20">
+  <div class="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1fr_1.05fr] md:gap-16">
+    <div class="hero-copy">
+      <p class="eyebrow">{eyebrow}</p>
+      {leadInline ? (
+        <h1 class="text-[clamp(2.4rem,4.6vw,3.8rem)]">
+          {title} <em class="font-[350] text-primary">{lead}</em>
+        </h1>
+      ) : (
+        <h1 class="text-[clamp(2.6rem,5.5vw,4.4rem)]">{title}</h1>
+      )}
+      {lead && !leadInline && (
+        <p class="mt-2.5 font-serif text-[clamp(1.5rem,2.6vw,2rem)] leading-tight text-primary italic">{lead}</p>
+      )}
+      <p class="mt-6 mb-8 max-w-[34rem]">{text}</p>
+      <div class="flex flex-wrap items-center gap-3">
+        <a href={mailto(lang)} class="btn btn-primary btn-lg">{tr('cta.email')}</a>
+        {next && (
+          <a href={next.href} class="btn btn-lg btn-outline border-primary text-secondary-content hover:bg-primary/10 hover:text-secondary-content">
+            {next.title} <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        )}
+      </div>
+    </div>
+    <div class="hero-media -order-1 md:order-none">
+      {variant === 'portrait' ? (
+        <div class="portrait-frame mx-auto w-full max-w-80 md:mr-0 md:ml-auto md:max-w-[30rem]">
+          <Image src={image} alt={imageAlt} widths={[320, 480, 600]} sizes="(min-width: 768px) 30rem, 20rem" class="h-auto w-full" loading="eager" />
+        </div>
+      ) : (
+        <div class="photo-frame">
+          <Image src={image} alt={imageAlt} widths={[480, 800, 1200]} sizes="(min-width: 768px) 50vw, 100vw" class="h-auto" loading="eager" />
+        </div>
+      )}
+    </div>
+  </div>
+</section>
