@@ -20,6 +20,9 @@ const fullTitle = `${title} | Psychotherapie ${practice.name.replace('Dr. ', '')
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const otherLang: Lang = lang === 'de' ? 'en' : 'de';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+// Any build not for the real domain (the GitHub Pages staging URL) stays out
+// of search engines, so staging never competes with psychotherapie-bausch.de.
+const isProduction = Astro.site?.hostname === 'psychotherapie-bausch.de';
 ---
 
 <!doctype html>
@@ -30,7 +33,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {(noindex || !isProduction) && <meta name="robots" content="noindex" />}
     <link rel="alternate" hreflang={lang} href={canonical} />
     {alternateUrl && (
       <link rel="alternate" hreflang={otherLang} href={new URL(alternateUrl, Astro.site)} />
