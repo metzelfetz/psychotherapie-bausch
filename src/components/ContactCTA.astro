@@ -1,0 +1,13 @@
+---
+import { mailto } from '../data/practice';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+---
+
+<a href={mailto(lang)} class="btn btn-primary btn-lg not-prose self-start">{tr('cta.email')}</a>

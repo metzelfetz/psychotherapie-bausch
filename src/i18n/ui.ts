@@ -10,7 +10,12 @@ export const ui = {
     'cta.email': 'E-Mail senden',
     'footer.phone': 'Telefon',
     'footer.email': 'E-Mail',
+    'footer.legal': 'Rechtliches',
     'skip': 'Zum Inhalt springen',
+    'menu.open': 'Menü öffnen',
+    'map.consent': 'Beim Laden der Karte wird eine Verbindung zu OpenStreetMap hergestellt.',
+    'map.load': 'Karte laden',
+    'map.alt': 'Lage der Praxis',
   },
   en: {
     'nav.label': 'Main navigation',
@@ -19,7 +24,12 @@ export const ui = {
     'cta.email': 'Send an email',
     'footer.phone': 'Phone',
     'footer.email': 'Email',
+    'footer.legal': 'Legal',
     'skip': 'Skip to content',
+    'menu.open': 'Open menu',
+    'map.consent': 'Loading the map connects to OpenStreetMap.',
+    'map.load': 'Load map',
+    'map.alt': 'Location of the practice',
   },
 } as const;
 

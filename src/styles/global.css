@@ -33,3 +33,14 @@
 @theme {
   --font-sans: "Nunito Variable", ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Header colour change on scroll (see Header.astro's scroll listener). */
+#site-header.scrolled {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+#site-header.scrolled a,
+#site-header.scrolled svg {
+  color: var(--color-primary-content);
+}

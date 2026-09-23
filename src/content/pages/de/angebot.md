@@ -11,6 +11,7 @@ hero:
   text: Als Psychologischer Psychotherapeut biete ich Ihnen in meiner Praxis eine fundierte Diagnostik, Beratung und individuelle Psychotherapie an, die sich ganz an Ihren persönlichen Wünschen und Bedürfnissen orientiert.
   image: ../../../assets/Praxis_revised_3_sm.png
   imageAlt: Dr. Paul Bausch im Gespräch in seiner Praxis
+cta: true
 ---
 
 Den Fokus meiner beruflichen Expertise bildet die Behandlung von Depressionen, Burnout, Angsterkrankungen, Zwängen und Traumafolgestörungen. Hier kann ich Ihnen aufgrund meiner reichhaltigen klinischen und wissenschaftlichen Erfahrung eine fundierte und kompetente Begleitung anbieten. Zentrale Stationen meiner beruflichen Laufbahn bilden das Universitätsklinikum Freiburg, die Celenus Psychosomatische Fachklinik Freiburg und die mehrjährige selbständige Tätigkeit in ambulanter Praxis.

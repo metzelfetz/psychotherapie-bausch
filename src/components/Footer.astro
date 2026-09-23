@@ -1,5 +1,6 @@
 ---
 import { practice } from '../data/practice';
+import { pagesFor, urlFor } from '../i18n/pages';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -8,10 +9,11 @@ interface Props {
 
 const { lang } = Astro.props;
 const tr = t(lang);
+const legalPages = (await pagesFor(lang)).filter((p) => p.data.layout === 'legal');
 ---
 
 <footer class="bg-primary text-primary-content px-6 py-12 md:px-12">
-  <div class="mx-auto max-w-6xl grid gap-8 md:grid-cols-2">
+  <div class="mx-auto max-w-6xl grid gap-8 md:grid-cols-3">
     <address class="not-italic">
       <p class="text-2xl font-light mb-2">{practice.name}</p>
       <p>{practice.practiceName[lang]}</p>
@@ -21,5 +23,12 @@ const tr = t(lang);
       <p>{tr('footer.phone')}: <a class="link" href={practice.phone.href}>{practice.phone.display}</a></p>
       <p>{tr('footer.email')}: <a class="link" href={`mailto:${practice.email}`}>{practice.email}</a></p>
     </div>
+    <nav aria-label={tr('footer.legal')}>
+      <ul class="flex flex-col gap-1">
+        {legalPages.map((p) => (
+          <li><a class="link" href={urlFor(lang, p.data.slug)}>{p.data.title}</a></li>
+        ))}
+      </ul>
+    </nav>
   </div>
 </footer>

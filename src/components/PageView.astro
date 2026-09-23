@@ -2,6 +2,10 @@
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Prose from './Prose.astro';
+import ContactCTA from './ContactCTA.astro';
+import CvTable from './CvTable.astro';
+import Map from './Map.astro';
 import { counterpart, langOf, urlFor, type Page } from '../i18n/pages';
 
 interface Props {
@@ -13,7 +17,7 @@ const lang = langOf(page);
 const { Content } = await render(page);
 const other = await counterpart(page);
 const alternateUrl = other ? urlFor(lang === 'de' ? 'en' : 'de', other.data.slug) : undefined;
-const { hero } = page.data;
+const { hero, cv, trainings, showMap } = page.data;
 ---
 
 <BaseLayout
@@ -35,10 +39,13 @@ const { hero } = page.data;
       </div>
     </section>
   )}
-  <div class="mx-auto max-w-6xl px-4 py-8">
-    <article class="prose prose-lg max-w-none">
+  <div class="mx-auto max-w-6xl px-4 py-8 flex flex-col gap-8">
+    <Prose>
       {!hero && <h1>{page.data.title}</h1>}
       <Content />
-    </article>
+    </Prose>
+    {cv && <CvTable cv={cv} trainings={trainings} />}
+    {showMap && <Map lang={lang} />}
+    {page.data.cta && <ContactCTA lang={lang} />}
   </div>
 </BaseLayout>

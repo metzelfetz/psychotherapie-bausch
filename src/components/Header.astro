@@ -15,12 +15,19 @@ const current = Astro.url.pathname.replace(/\/?$/, '/');
 const otherLang: Lang = lang === 'de' ? 'en' : 'de';
 ---
 
-<header class="navbar bg-base-100 px-4 md:px-8 border-b border-base-300">
+<header
+  id="site-header"
+  class="navbar sticky top-0 z-50 relative bg-base-100 px-4 md:px-8 border-b border-base-300 transition-colors duration-300"
+>
   <div class="flex-1">
     <a href={urlFor(lang, '')} class="text-xl font-light tracking-wide">{practice.name}</a>
   </div>
-  <nav aria-label={tr('nav.label')} class="flex-none">
-    <ul class="menu menu-horizontal gap-1 hidden md:flex">
+
+  <!-- Checkbox-driven mobile menu: no client JS needed to open or close it. -->
+  <input type="checkbox" id="nav-toggle" class="peer hidden" />
+
+  <nav aria-label={tr('nav.label')} class="flex-none hidden md:block">
+    <ul class="menu menu-horizontal gap-1">
       {navPages.map((p) => {
         const href = urlFor(lang, p.data.slug);
         return (
@@ -33,9 +40,52 @@ const otherLang: Lang = lang === 'de' ? 'en' : 'de';
       })}
     </ul>
   </nav>
+
   {alternateUrl && (
-    <a href={alternateUrl} hreflang={otherLang} lang={otherLang} class="btn btn-ghost btn-sm uppercase" aria-label={tr('lang.switch')}>
+    <a
+      href={alternateUrl}
+      hreflang={otherLang}
+      lang={otherLang}
+      class="btn btn-ghost btn-sm uppercase hidden md:inline-flex"
+      aria-label={tr('lang.switch')}
+    >
       {otherLang}
     </a>
   )}
+
+  <label for="nav-toggle" class="btn btn-square btn-ghost md:hidden" aria-label={tr('menu.open')}>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </label>
+
+  <ul class="menu absolute inset-x-0 top-full hidden w-full flex-col gap-1 border-b border-base-300 bg-base-100 p-4 peer-checked:flex md:hidden">
+    {navPages.map((p) => {
+      const href = urlFor(lang, p.data.slug);
+      return (
+        <li>
+          <a href={href} aria-current={href === current ? 'page' : undefined}>
+            {p.data.title}
+          </a>
+        </li>
+      );
+    })}
+    {alternateUrl && (
+      <li>
+        <a href={alternateUrl} hreflang={otherLang} lang={otherLang} class="uppercase" aria-label={tr('lang.switch')}>
+          {otherLang}
+        </a>
+      </li>
+    )}
+  </ul>
 </header>
+
+<script>
+  // Tiny vanilla scroll listener: replaces v1's jQuery navbar-colour script (script.js).
+  const header = document.getElementById('site-header');
+  if (header) {
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+    onScroll();
+    document.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

@@ -28,6 +28,8 @@ const pages = defineCollection({
       cv: z.array(z.object({ period: z.string(), text: z.string() })).optional(),
       trainings: z.array(z.string()).optional(),
       showMap: z.boolean().default(false),
+      // Shows the mailto "Email senden" button below the prose.
+      cta: z.boolean().default(false),
     }),
 });
 
