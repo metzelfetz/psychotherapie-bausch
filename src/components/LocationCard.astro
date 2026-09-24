@@ -14,6 +14,10 @@ interface Props {
 
 const { lang, location, text } = Astro.props;
 const tr = t(lang);
+// A billing entry is a string, or { text, strong } for one shown in bold.
+const billing = location.billing[lang].map((item) =>
+  typeof item === 'string' ? { text: item, strong: false } : item,
+);
 const labelClass = 'mb-1 text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-muted';
 ---
 
@@ -31,12 +35,12 @@ const labelClass = 'mb-1 text-[0.8rem] font-semibold uppercase tracking-[0.14em]
   <div>
     <p class="mb-3">{text}</p>
     <ul class="flex flex-col gap-1.5">
-      {location.billing[lang].map((item) => (
+      {billing.map((item) => (
         <li class="relative pl-6">
           <svg class="absolute top-[0.45em] left-0 h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12.5l4.5 4.5L19 7.5" />
           </svg>
-          {item}
+          {item.strong ? <strong class="font-semibold">{item.text}</strong> : item.text}
         </li>
       ))}
     </ul>

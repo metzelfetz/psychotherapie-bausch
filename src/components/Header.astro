@@ -21,10 +21,10 @@ const taglineParts = practice.tagline[lang].split(' · ');
   id="site-header"
   class="sticky top-0 z-50 border-b border-transparent bg-base-100/85 backdrop-blur-md transition-colors duration-300"
 >
-  <div class="relative mx-auto flex min-h-15 max-w-6xl items-center gap-4 px-4 md:min-h-18 xl:gap-6">
+  <div class="relative mx-auto flex min-h-16 max-w-6xl items-center gap-4 px-4 md:min-h-20 xl:gap-6">
     <a href={urlFor(lang, '')} class="mr-auto leading-tight no-underline">
-      <span class="block font-serif text-xl font-[450] tracking-tight md:text-2xl">{practice.practiceName[lang]}</span>
-      <span class="block text-[0.75rem] text-muted md:text-[0.8rem] md:tracking-wide">
+      <span class="block font-serif text-[1.35rem] font-[450] tracking-tight md:text-[1.75rem]">{practice.practiceName[lang]}</span>
+      <span class="block text-[0.75rem] text-muted md:text-[0.95rem] md:tracking-wide">
         {taglineParts.map((part, i) => (
           <span class="inline-block whitespace-nowrap">{part}{i < taglineParts.length - 1 && <span aria-hidden="true">&nbsp;·&nbsp;</span>}</span>
         ))}
@@ -36,7 +36,7 @@ const taglineParts = practice.tagline[lang].split(' · ');
 
     <nav aria-label={tr('nav.label')} class="hidden items-center gap-0.5 lg:flex xl:gap-1">
       {nav.map((n) => (
-        <a href={n.href} class="nav-link whitespace-nowrap text-base">{n.label}</a>
+        <a href={n.href} class="nav-link whitespace-nowrap text-[1.1rem]">{n.label}</a>
       ))}
       {alternateUrl && (
         <a

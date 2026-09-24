@@ -28,8 +28,9 @@ export const locations = [
     postalCode: '79650',
     days: { de: 'Montag bis Mittwoch', en: 'Monday to Wednesday' },
     billing: {
-      de: ['Alle gesetzlichen Krankenkassen', 'Private Krankenversicherungen & Beihilfe', 'Selbstzahler'],
-      en: ['All statutory health insurers', 'Private health insurance & Beihilfe', 'Self-payers'],
+      // Bold on the card: it applies to most patients (Paul, 2026-09-24).
+      de: [{ text: 'Alle gesetzlichen Krankenkassen', strong: true }, 'Private Krankenversicherungen & Beihilfe', 'Selbstzahler'],
+      en: [{ text: 'All statutory health insurers', strong: true }, 'Private health insurance & Beihilfe', 'Self-payers'],
     },
     geo: { lat: 47.6485758, lng: 7.8261394 },
   },
@@ -48,9 +49,6 @@ export const locations = [
 ] as const;
 
 export type Location = (typeof locations)[number];
-
-/** "Schopfheim & Freiburg", for the eyebrow. */
-export const cities = locations.map((l) => l.city).join(' & ');
 
 // Crisis lines for the footer note (approved by the user, 2026-09-23).
 export const crisisLines = {

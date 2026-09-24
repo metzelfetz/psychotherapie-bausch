@@ -15,8 +15,14 @@ Deutschland
 Telefon: +49 (0)157 86444932\
 E-Mail: mail@psychotherapie-bausch.de
 
-**Psychologischer Psychotherapeut, Approbation**\
-Regierungspräsidium Stuttgart, Fachkundenachweis für Verhaltenstherapie bei Erwachsenen. Arztregister: KV Südbaden, Freiburg, LANR 8676995.
+**Gesetzliche Berufsbezeichnung**\
+Psychologischer Psychotherapeut, verliehen in Deutschland (Baden-Württemberg). Approbation durch das Regierungspräsidium Stuttgart, Fachkundenachweis für Verhaltenstherapie bei Erwachsenen.
+
+**Zuständige Kammer**\
+Landespsychotherapeutenkammer Baden-Württemberg (LPK Baden-Württemberg)
+
+**Zuständige Kassenärztliche Vereinigung**\
+KVBW, Arztregister LANR 8676995
 
 **Berufsrechtliche Regelungen**\
 Das Berufsrecht ist, soweit keine anderen Regelungen durch die Kammer gültig sind, geregelt durch das Psychotherapeutengesetz (PsychThG) vom 1.1.1999 sowie durch das Gesetz über die Berufe der Psychologischen Psychotherapeuten und Kinder- und Jugendpsychotherapeuten.

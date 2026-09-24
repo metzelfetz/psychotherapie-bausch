@@ -6,7 +6,7 @@ import { t, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lead?: string;
   /** One string per paragraph. */
@@ -27,10 +27,10 @@ const tr = t(lang);
 const leadInline = lead && title.trimEnd().endsWith(',');
 ---
 
-<section id={anchor} class="scroll-mt-15 px-4 pt-5 pb-12 md:scroll-mt-18 md:pt-11 md:pb-20">
+<section id={anchor} class="scroll-mt-16 px-4 pt-5 pb-12 md:scroll-mt-20 md:pt-11 md:pb-20">
   <div class="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1fr_1.05fr] md:gap-16">
     <div class="hero-copy">
-      <p class="eyebrow">{eyebrow}</p>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       {leadInline ? (
         <h1 class="text-[clamp(2.4rem,4.6vw,3.8rem)]">
           {title} <em class="font-[350] text-primary">{lead}</em>
@@ -55,8 +55,8 @@ const leadInline = lead && title.trimEnd().endsWith(',');
     </div>
     <div class="hero-media -order-1 md:order-none">
       {variant === 'portrait' ? (
-        <div class="portrait-frame mx-auto w-full max-w-80 md:mr-0 md:ml-auto md:max-w-[30rem]">
-          <Image src={image} alt={imageAlt} widths={[320, 480, 640, 960]} sizes="(min-width: 768px) 30rem, 20rem" class="h-auto w-full" loading="eager" />
+        <div class="portrait-frame mx-auto w-full max-w-72 md:mr-0 md:ml-auto md:max-w-[26rem]">
+          <Image src={image} alt={imageAlt} widths={[320, 480, 640, 960]} sizes="(min-width: 768px) 26rem, 18rem" class="h-auto w-full" loading="eager" />
         </div>
       ) : (
         <div class="photo-frame">

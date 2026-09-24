@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 // One Markdown file per page and language: src/content/pages/<lang>/<name>.md
-// Since s3 the home page is a one-pager: its frame (hero, band, contact box)
+// Since s3 the home page is a one-pager: its frame (hero, contact box)
 // lives here, its body text in the `sections` collection below.
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
@@ -33,8 +33,6 @@ const pages = defineCollection({
           variant: z.enum(['photo', 'portrait']).default('photo'),
         })
         .optional(),
-      // Wide photo between the second-to-last and the last section.
-      band: z.object({ image: image(), imageAlt: z.string() }).optional(),
       // Closing sentence of the page, shown in the contact box with the
       // mailto button and phone number. No box when it is missing.
       cta: z.string().optional(),

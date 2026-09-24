@@ -10,6 +10,8 @@ interface Props {
 
 const { lang, text } = Astro.props;
 const tr = t(lang);
+// Lets a narrow column wrap the address after the @, not mid-word.
+const emailParts = practice.email.split('@');
 ---
 
 <div class="reveal grid items-center gap-8 rounded-[2rem] bg-secondary p-8 md:grid-cols-[1.4fr_1fr] md:p-14">
@@ -21,6 +23,10 @@ const tr = t(lang);
     <a href={practice.phone.href} class="font-semibold text-secondary-content hover:underline hover:underline-offset-4">
       {tr('cta.call')} {practice.phone.display}
     </a>
+    <!-- Plain text, not a link, so the address can be copied into any mail program. -->
+    <p class="text-secondary-content">
+      {tr('cta.address')} <span class="font-semibold select-all">{emailParts[0]}@<wbr />{emailParts[1]}</span>
+    </p>
     <p class="relative mt-1 pl-6 text-[0.9rem] leading-normal text-secondary-content">
       <svg class="absolute top-0.5 left-0 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" />

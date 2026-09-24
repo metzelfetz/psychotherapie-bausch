@@ -15,8 +15,5 @@ hero:
   image: ../../../assets/Portrait_cutout.png
   variant: portrait
   imageAlt: Dr. Paul Bausch, Psychologischer Psychotherapeut in Schopfheim und Freiburg
-band:
-  image: ../../../assets/Gespraech.jpg
-  imageAlt: Dr. Paul Bausch im Gespräch in seinen Praxisräumen
 cta: Gerne können Sie sich direkt für ein unverbindliches Erstgespräch anmelden.
 ---

@@ -7,7 +7,7 @@ import Prose from './Prose.astro';
 import ContactCTA from './ContactCTA.astro';
 import CvTimeline from './CvTimeline.astro';
 import LocationCard from './LocationCard.astro';
-import { cities, locations, practice } from '../data/practice';
+import { locations } from '../data/practice';
 import { counterpart, langOf, sectionsFor, urlFor, type Page } from '../i18n/pages';
 import { t } from '../i18n/ui';
 
@@ -21,17 +21,16 @@ const tr = t(lang);
 const { Content } = await render(page);
 const other = await counterpart(page);
 const alternateUrl = other ? urlFor(lang === 'de' ? 'en' : 'de', other.data.slug) : undefined;
-const { hero, band, cta, layout } = page.data;
+const { hero, cta, layout } = page.data;
 
-// Two kinds of page: the one-pager at the root (hero, the sections, the band
-// before the last section, one contact box at the end) and the legal pages.
+// Two kinds of page: the one-pager at the root (hero, the sections, one
+// contact box at the end) and the legal pages.
 const isHome = page.data.slug === '';
 const sections = isHome
   ? await Promise.all(
       (await sectionsFor(lang)).map(async (s) => ({ ...s.data, Content: (await render(s)).Content })),
     )
   : [];
-const eyebrow = isHome ? `${practice.practiceName[lang]} · ${cities}` : page.data.title;
 const first = sections[0];
 const more = first && { href: `#${first.anchor}`, title: tr('hero.more') };
 const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
@@ -44,7 +43,7 @@ const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
   noindex={layout === 'legal'}
   alternateUrl={alternateUrl}
 >
-  {hero && <Hero lang={lang} eyebrow={eyebrow} {...hero} next={more} />}
+  {hero && <Hero lang={lang} {...hero} next={more} />}
 
   {layout === 'legal' ? (
     <section class="px-4 pt-12 pb-20 md:pt-20">
@@ -58,56 +57,41 @@ const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
   ) : (
     <>
       {sections.map(({ title, anchor, cv, links, locations: cards, Content: SectionContent }, i) => (
-        <>
-          {band && i === sections.length - 1 && (
-            <div class="px-4 pb-14 md:pb-24">
-              <div class="reveal mx-auto max-w-6xl">
-                <Image
-                  src={band.image}
-                  alt={band.imageAlt}
-                  widths={[640, 1200, 1800, 2400]}
-                  sizes="(min-width: 72rem) 72rem, 100vw"
-                  class="aspect-[4/3] w-full rounded-[2rem] object-cover object-[22%_35%] md:aspect-[21/9] md:object-[center_32%]"
-                />
+        <section
+          id={anchor}
+          aria-labelledby={`${anchor}-title`}
+          class:list={['scroll-mt-16 px-4 py-14 md:scroll-mt-20 md:py-24', i % 2 === 0 ? 'bg-base-200' : 'bg-base-100']}
+        >
+          <div class="mx-auto max-w-6xl">
+            <Prose lead>
+              <h2 id={`${anchor}-title`}>{title}</h2>
+              <SectionContent />
+            </Prose>
+
+            {cv && (
+              <div class="mt-12 md:mt-16">
+                <CvTimeline cv={cv} />
               </div>
-            </div>
-          )}
-          <section
-            id={anchor}
-            aria-labelledby={`${anchor}-title`}
-            class:list={['scroll-mt-15 px-4 py-14 md:scroll-mt-18 md:py-24', i % 2 === 0 ? 'bg-base-200' : 'bg-base-100']}
-          >
-            <div class="mx-auto max-w-6xl">
-              <Prose lead>
-                <h2 id={`${anchor}-title`}>{title}</h2>
-                <SectionContent />
-              </Prose>
+            )}
 
-              {cv && (
-                <div class="mt-12 md:mt-16">
-                  <CvTimeline cv={cv} />
-                </div>
-              )}
+            {links && (
+              <div class="reveal mt-4 max-w-[50rem]">
+                <p class="mb-4">{links.text}</p>
+                <ul class="link-cards">
+                  {links.items.map((l) => (
+                    <li><a href={l.href} target="_blank" rel="noopener">{l.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-              {links && (
-                <div class="reveal mt-4 max-w-[50rem]">
-                  <p class="mb-4">{links.text}</p>
-                  <ul class="link-cards">
-                    {links.items.map((l) => (
-                      <li><a href={l.href} target="_blank" rel="noopener">{l.label}</a></li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {cards && (
-                <div class="mt-10 grid gap-6 md:mt-14 md:grid-cols-2 md:gap-8">
-                  {cards.map((c) => <LocationCard lang={lang} location={locationById[c.id]} text={c.text} />)}
-                </div>
-              )}
-            </div>
-          </section>
-        </>
+            {cards && (
+              <div class="mt-10 grid gap-6 md:mt-14 md:grid-cols-2 md:gap-8">
+                {cards.map((c) => <LocationCard lang={lang} location={locationById[c.id]} text={c.text} />)}
+              </div>
+            )}
+          </div>
+        </section>
       ))}
 
       {cta && (
