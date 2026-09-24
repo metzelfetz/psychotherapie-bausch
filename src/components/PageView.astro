@@ -4,12 +4,11 @@ import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from './Hero.astro';
 import Prose from './Prose.astro';
-import Aside from './Aside.astro';
 import ContactCTA from './ContactCTA.astro';
 import CvTimeline from './CvTimeline.astro';
-import Map from './Map.astro';
-import { practice } from '../data/practice';
-import { counterpart, langOf, pagesFor, urlFor, type Page } from '../i18n/pages';
+import LocationCard from './LocationCard.astro';
+import { cities, locations, practice } from '../data/practice';
+import { counterpart, langOf, sectionsFor, urlFor, type Page } from '../i18n/pages';
 import { t } from '../i18n/ui';
 
 interface Props {
@@ -22,22 +21,20 @@ const tr = t(lang);
 const { Content } = await render(page);
 const other = await counterpart(page);
 const alternateUrl = other ? urlFor(lang === 'de' ? 'en' : 'de', other.data.slug) : undefined;
-const { hero, cv, trainings, highlights, aside, band, showMap, cta, layout } = page.data;
+const { hero, band, cta, layout } = page.data;
 
-// The home page's eyebrow names the practice; other pages use their title.
+// Two kinds of page: the one-pager at the root (hero, the sections, the band
+// before the last section, one contact box at the end) and the legal pages.
 const isHome = page.data.slug === '';
-const eyebrow = isHome ? `${practice.practiceName[lang]} · ${practice.cityLong[lang]}` : page.data.title;
-
-// The hero's secondary link points to the next page in the navigation.
-const navPages = (await pagesFor(lang)).filter((p) => p.data.nav);
-const nextPage = navPages[navPages.findIndex((p) => p.id === page.id) + 1];
-const next = nextPage && { href: urlFor(lang, nextPage.data.slug), title: nextPage.data.title };
-
-const groups = [
-  ...(highlights ?? []),
-  ...(trainings?.length ? [{ label: tr('cv.trainings'), items: trainings }] : []),
-];
-const hasAside = groups.length > 0 || aside !== undefined;
+const sections = isHome
+  ? await Promise.all(
+      (await sectionsFor(lang)).map(async (s) => ({ ...s.data, Content: (await render(s)).Content })),
+    )
+  : [];
+const eyebrow = isHome ? `${practice.practiceName[lang]} · ${cities}` : page.data.title;
+const first = sections[0];
+const more = first && { href: `#${first.anchor}`, title: tr('hero.more') };
+const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
 ---
 
 <BaseLayout
@@ -47,7 +44,7 @@ const hasAside = groups.length > 0 || aside !== undefined;
   noindex={layout === 'legal'}
   alternateUrl={alternateUrl}
 >
-  {hero && <Hero lang={lang} eyebrow={eyebrow} {...hero} next={next} />}
+  {hero && <Hero lang={lang} eyebrow={eyebrow} {...hero} next={more} />}
 
   {layout === 'legal' ? (
     <section class="px-4 pt-12 pb-20 md:pt-20">
@@ -60,46 +57,59 @@ const hasAside = groups.length > 0 || aside !== undefined;
     </section>
   ) : (
     <>
-      <section class="bg-base-200 px-4 py-14 md:py-24">
-        <div class:list={['mx-auto max-w-6xl', { 'grid gap-12 md:grid-cols-[minmax(0,40rem)_minmax(0,18rem)] md:justify-between md:gap-16': hasAside }]}>
-          <Prose lead>
-            {!hero && <h1>{page.data.title}</h1>}
-            <Content />
-          </Prose>
-          {hasAside && <Aside lang={lang} groups={groups} facts={aside} />}
-        </div>
-      </section>
+      {sections.map(({ title, anchor, navLabel, cv, links, locations: cards, Content: SectionContent }, i) => (
+        <>
+          {band && i === sections.length - 1 && (
+            <div class="px-4 pb-14 md:pb-24">
+              <div class="reveal mx-auto max-w-6xl">
+                <Image
+                  src={band.image}
+                  alt={band.imageAlt}
+                  widths={[640, 1200, 1800, 2400]}
+                  sizes="(min-width: 72rem) 72rem, 100vw"
+                  class="aspect-[4/3] w-full rounded-[2rem] object-cover object-[22%_35%] md:aspect-[21/9] md:object-[center_32%]"
+                />
+              </div>
+            </div>
+          )}
+          <section
+            id={anchor}
+            aria-label={title ? undefined : navLabel}
+            aria-labelledby={title ? `${anchor}-title` : undefined}
+            class:list={['scroll-mt-15 px-4 py-14 md:scroll-mt-18 md:py-24', i % 2 === 0 ? 'bg-base-200' : 'bg-base-100']}
+          >
+            <div class="mx-auto max-w-6xl">
+              <Prose lead>
+                {title && <h2 id={`${anchor}-title`}>{title}</h2>}
+                <SectionContent />
+              </Prose>
 
-      {cv && (
-        <section class="px-4 pt-14 md:pt-24">
-          <div class="mx-auto max-w-6xl">
-            <p class="eyebrow reveal mb-10">{tr('cv.heading')}</p>
-            <CvTimeline cv={cv} />
-          </div>
-        </section>
-      )}
+              {cv && (
+                <div class="mt-12 md:mt-16">
+                  <CvTimeline cv={cv} />
+                </div>
+              )}
 
-      {showMap && (
-        <section class="px-4 pt-14 md:pt-24">
-          <div class="mx-auto max-w-6xl">
-            <Map lang={lang} />
-          </div>
-        </section>
-      )}
+              {links && (
+                <div class="reveal mt-4 max-w-[50rem]">
+                  <p class="mb-4">{links.text}</p>
+                  <ul class="link-cards">
+                    {links.items.map((l) => (
+                      <li><a href={l.href} target="_blank" rel="noopener">{l.label}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
-      {band && (
-        <section class="px-4 pt-14 md:pt-24">
-          <div class="reveal mx-auto max-w-6xl">
-            <Image
-              src={band.image}
-              alt={band.imageAlt}
-              widths={[640, 1200, 1800, 2400]}
-              sizes="(min-width: 72rem) 72rem, 100vw"
-              class="aspect-[4/3] w-full rounded-[2rem] object-cover object-[35%_center] md:aspect-[21/9]"
-            />
-          </div>
-        </section>
-      )}
+              {cards && (
+                <div class="mt-10 grid gap-6 md:mt-14 md:grid-cols-2 md:gap-8">
+                  {cards.map((c) => <LocationCard lang={lang} location={locationById[c.id]} text={c.text} />)}
+                </div>
+              )}
+            </div>
+          </section>
+        </>
+      ))}
 
       {cta && (
         <section class="px-4 py-14 md:py-24">

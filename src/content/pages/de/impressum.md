@@ -1,6 +1,6 @@
 ---
 title: Impressum
-description: Impressum der Privatpraxis für Psychotherapie Dr. Paul Bausch, Freiburg.
+description: Impressum der Praxis für Psychotherapie Dr. Paul Bausch in Schopfheim und Freiburg.
 slug: impressum
 translationKey: legal-notice
 layout: legal

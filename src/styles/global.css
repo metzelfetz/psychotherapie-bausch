@@ -21,7 +21,7 @@
   --color-base-200: #efe9dd;         /* alternate section background */
   --color-base-300: #ddd5c6;         /* hairlines and borders */
   --color-base-content: #2e2c28;     /* 12.6:1 */
-  --color-secondary: #e9dfcb;        /* sand panels, chips */
+  --color-secondary: #e9dfcb;        /* sand panels */
   --color-secondary-content: #4a5a3c; /* dark olive, 6.7:1 on base-100, 5.6:1 on sand */
   --color-accent: #c9b58e;           /* deep sand, decoration only (3.8:1) */
   --color-accent-content: #2e2c28;
@@ -159,15 +159,6 @@
     opacity: 0.55;
   }
 
-  .chip {
-    padding: 0.45rem 0.85rem;
-    border-radius: 99px;
-    font-size: 0.95rem;
-    line-height: 1.3;
-    background: var(--color-secondary);
-    color: var(--color-secondary-content);
-  }
-
   /* CV timeline: period column, a hairline and a dot per entry. */
   .timeline-cv {
     --period: 11rem;
@@ -237,6 +228,14 @@
   font-size: 1.1875rem;
   line-height: 1.7;
 }
+/* Long German compounds ("Behandlungsschwerpunkte") overflow a phone-width
+   heading unless they may hyphenate. */
+.prose :where(h1, h2, h3) {
+  hyphens: auto;
+  /* Only words of 16+ letters, so "Erreichbarkeit" stays whole. */
+  hyphenate-limit-chars: 16 8 8;
+  overflow-wrap: break-word;
+}
 .prose :where(a) {
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22em;
@@ -258,40 +257,40 @@
     font-size: 1.05em;
   }
 }
-/* On content pages (not legal ones), a list of external links renders as
-   link cards, e.g. the publications links on the home page. */
-.prose-lead ul:has(> li > a[href^="http"]) {
+/* External links as cards (the publications links under the CV). */
+.link-cards {
   display: grid;
   gap: 0.75rem;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
-.prose-lead ul:has(> li > a[href^="http"]) > li {
-  margin: 0;
-  padding: 1rem 1.15rem;
+@media (min-width: 48rem) {
+  .link-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.link-cards > li {
   border: 1px solid var(--color-base-300);
   border-radius: 1rem;
-  background: var(--color-base-100);
-  font-size: 0.85em;
-  line-height: 1.4;
-  color: var(--color-muted);
+  background: var(--color-base-200);
   transition: border-color 0.2s, transform 0.2s;
 }
-.prose-lead ul:has(> li > a[href^="http"]) > li:hover {
+.link-cards > li:hover {
   border-color: var(--color-primary);
   transform: translateY(-2px);
 }
-.prose-lead ul:has(> li > a[href^="http"]) > li::marker {
-  content: none;
-}
-.prose-lead ul:has(> li > a[href^="http"]) a {
+.link-cards a {
   display: block;
-  margin-top: 0.2rem;
+  padding: 1rem 1.15rem;
   font-family: var(--font-serif);
-  font-size: 1.3em;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  color: var(--color-secondary-content);
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
-.prose-lead ul:has(> li > a[href^="http"]) a::after {
+.link-cards a::after {
   content: " ↗";
 }
 

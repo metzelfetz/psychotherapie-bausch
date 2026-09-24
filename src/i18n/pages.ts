@@ -23,3 +23,16 @@ export async function counterpart(page: Page) {
   const all = await pagesFor(other);
   return all.find((p) => p.data.translationKey === page.data.translationKey);
 }
+
+export type Section = CollectionEntry<'sections'>;
+
+/** The one-pager's sections for a language, in page order. */
+export async function sectionsFor(lang: Lang) {
+  const all = await getCollection('sections');
+  return all.filter((s) => s.id.startsWith(`${lang}/`)).sort((a, b) => a.data.order - b.data.order);
+}
+
+/** A section's anchor on the home page; works from any page. */
+export function sectionUrl(lang: Lang, section: Section) {
+  return `${urlFor(lang, '')}#${section.data.anchor}`;
+}

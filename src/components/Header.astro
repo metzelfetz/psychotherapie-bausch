@@ -1,5 +1,5 @@
 ---
-import { pagesFor, urlFor } from '../i18n/pages';
+import { sectionsFor, sectionUrl, urlFor } from '../i18n/pages';
 import { languages, t, type Lang } from '../i18n/ui';
 import { mailto, practice } from '../data/practice';
 
@@ -10,10 +10,11 @@ interface Props {
 
 const { lang, alternateUrl } = Astro.props;
 const tr = t(lang);
-const navPages = (await pagesFor(lang)).filter((p) => p.data.nav);
-const current = Astro.url.pathname.replace(/\/?$/, '/');
+// The nav links are the one-pager's section anchors.
+const nav = (await sectionsFor(lang)).map((s) => ({ href: sectionUrl(lang, s), label: s.data.navLabel }));
 const otherLang: Lang = lang === 'de' ? 'en' : 'de';
-const tagline = practice.tagline[lang].replace(' | ', ' · ');
+// Split at the "·" so a narrow screen wraps the subline between its parts.
+const taglineParts = practice.tagline[lang].split(' · ');
 ---
 
 <header
@@ -22,22 +23,21 @@ const tagline = practice.tagline[lang].replace(' | ', ' · ');
 >
   <div class="relative mx-auto flex min-h-15 max-w-6xl items-center gap-4 px-4 md:min-h-18 xl:gap-6">
     <a href={urlFor(lang, '')} class="mr-auto leading-tight no-underline">
-      <span class="block font-serif text-xl font-[450] tracking-tight md:text-2xl">{practice.name}</span>
-      <span class="block whitespace-nowrap text-[0.7rem] text-muted md:text-[0.8rem] md:tracking-wide">{tagline}</span>
+      <span class="block font-serif text-xl font-[450] tracking-tight md:text-2xl">{practice.practiceName[lang]}</span>
+      <span class="block text-[0.75rem] text-muted md:text-[0.8rem] md:tracking-wide">
+        {taglineParts.map((part, i) => (
+          <span class="inline-block whitespace-nowrap">{part}{i < taglineParts.length - 1 && <span aria-hidden="true">&nbsp;·&nbsp;</span>}</span>
+        ))}
+      </span>
     </a>
 
     <!-- Checkbox-driven mobile menu: no client JS needed to open or close it. -->
     <input type="checkbox" id="nav-toggle" class="peer hidden" />
 
     <nav aria-label={tr('nav.label')} class="hidden items-center gap-0.5 lg:flex xl:gap-1">
-      {navPages.map((p) => {
-        const href = urlFor(lang, p.data.slug);
-        return (
-          <a href={href} class="nav-link whitespace-nowrap text-base" aria-current={href === current ? 'page' : undefined}>
-            {p.data.title}
-          </a>
-        );
-      })}
+      {nav.map((n) => (
+        <a href={n.href} class="nav-link whitespace-nowrap text-base">{n.label}</a>
+      ))}
       {alternateUrl && (
         <a
           href={alternateUrl}
@@ -58,19 +58,10 @@ const tagline = practice.tagline[lang].replace(' | ', ' · ');
       </svg>
     </label>
 
-    <div class="absolute inset-x-0 top-full hidden flex-col border-b border-base-300 bg-base-100 px-4 pt-2 pb-6 peer-checked:flex lg:hidden">
-      {navPages.map((p) => {
-        const href = urlFor(lang, p.data.slug);
-        return (
-          <a
-            href={href}
-            class="border-b border-base-300 px-2 py-3 text-lg aria-[current=page]:font-semibold aria-[current=page]:text-secondary-content"
-            aria-current={href === current ? 'page' : undefined}
-          >
-            {p.data.title}
-          </a>
-        );
-      })}
+    <div id="nav-menu" class="absolute inset-x-0 top-full hidden flex-col border-b border-base-300 bg-base-100 px-4 pt-2 pb-6 peer-checked:flex lg:hidden">
+      {nav.map((n) => (
+        <a href={n.href} class="border-b border-base-300 px-2 py-3 text-lg">{n.label}</a>
+      ))}
       {alternateUrl && (
         <a
           href={alternateUrl}
@@ -95,4 +86,13 @@ const tagline = practice.tagline[lang].replace(' | ', ' · ');
     onScroll();
     document.addEventListener('scroll', onScroll, { passive: true });
   }
+
+  // The mobile menu's links are anchors on the same page: close the menu
+  // when one is followed, so the section is not hidden behind it.
+  const toggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+  document.querySelectorAll('#nav-menu a').forEach((a) =>
+    a.addEventListener('click', () => {
+      if (toggle) toggle.checked = false;
+    }),
+  );
 </script>

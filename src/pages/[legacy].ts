@@ -6,10 +6,12 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 // endpoint route is used instead).
 // v1's index.html maps to the same root URL in v2, so it needs no redirect
 // stub (and a same-path stub would race the real homepage route).
+// Targets are a page slug or, since the one-pager (s3), a `#section` anchor
+// on the home page.
 const LEGACY_TARGETS: Record<string, string> = {
-  'ueber_mich.html': 'der-therapeut',
-  'ablauf.html': 'kontakt-aufnehmen',
-  'kontakt.html': 'gut-ankommen',
+  'ueber_mich.html': '#ueber-mich',
+  'ablauf.html': '#standorte',
+  'kontakt.html': '#standorte',
   'impressum.html': 'impressum',
   'datenschutz.html': 'datenschutz',
 };
@@ -20,7 +22,7 @@ export const getStaticPaths: GetStaticPaths = () =>
 export const GET: APIRoute = ({ params, site }) => {
   const target = LEGACY_TARGETS[params.legacy as string];
   const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-  const path = `${base}${target}${target ? '/' : ''}`;
+  const path = target.startsWith('#') ? `${base}${target}` : `${base}${target}/`;
   const url = new URL(path, site).toString();
   const body = `<!doctype html>
 <html lang="de">

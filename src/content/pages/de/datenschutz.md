@@ -1,6 +1,6 @@
 ---
 title: Datenschutz
-description: Datenschutzerklärung der Privatpraxis für Psychotherapie Dr. Paul Bausch, Freiburg.
+description: Datenschutzerklärung der Praxis für Psychotherapie Dr. Paul Bausch in Schopfheim und Freiburg.
 slug: datenschutz
 translationKey: privacy
 layout: legal
@@ -29,9 +29,9 @@ Diese Internetseite wird als statische Seite bei GitHub Pages (GitHub, Inc., 88 
 
 Diese Internetseite verwendet die Schriftarten Newsreader und Source Sans 3. Die Schriftdateien liegen lokal auf dem Server und werden direkt mit der Seite ausgeliefert; es findet keine Verbindung zu Google Fonts oder einem anderen externen Schriftanbieter statt.
 
-## Karte auf "Gut ankommen"
+## Karten im Abschnitt "Standorte"
 
-Auf der Seite "Gut ankommen" kann auf Wunsch eine Kartenansicht der Praxisadresse eingeblendet werden. Diese wird erst nach einem bewussten Klick auf "Karte laden" geladen. Erst dann wird eine Verbindung zu den Kartenkacheln von OpenStreetMap (OpenStreetMap Foundation, St John's Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes Königreich) hergestellt, wobei Ihre IP-Adresse an deren Server übermittelt wird. Näheres regelt die Datenschutzerklärung der OpenStreetMap Foundation, abrufbar unter [osmfoundation.org/wiki/Privacy_Policy](https://osmfoundation.org/wiki/Privacy_Policy).
+Im Abschnitt "Standorte" können auf Wunsch Kartenansichten der beiden Praxisadressen eingeblendet werden. Diese werden erst nach einem bewussten Klick auf "Karte laden" geladen. Erst dann wird eine Verbindung zu den Kartenkacheln von OpenStreetMap (OpenStreetMap Foundation, St John's Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes Königreich) hergestellt, wobei Ihre IP-Adresse an deren Server übermittelt wird. Näheres regelt die Datenschutzerklärung der OpenStreetMap Foundation, abrufbar unter [osmfoundation.org/wiki/Privacy_Policy](https://osmfoundation.org/wiki/Privacy_Policy).
 
 ## Erfassung von allgemeinen Daten und Informationen
 

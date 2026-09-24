@@ -13,7 +13,7 @@ interface Props {
   image: ImageMetadata;
   imageAlt: string;
   variant: 'photo' | 'portrait';
-  /** Secondary link to the next page in the navigation. */
+  /** Secondary link, to the first section of the one-pager. */
   next?: { href: string; title: string };
 }
 
@@ -51,7 +51,7 @@ const leadInline = lead && title.trimEnd().endsWith(',');
     <div class="hero-media -order-1 md:order-none">
       {variant === 'portrait' ? (
         <div class="portrait-frame mx-auto w-full max-w-80 md:mr-0 md:ml-auto md:max-w-[30rem]">
-          <Image src={image} alt={imageAlt} widths={[320, 480, 600]} sizes="(min-width: 768px) 30rem, 20rem" class="h-auto w-full" loading="eager" />
+          <Image src={image} alt={imageAlt} widths={[320, 480, 640, 960]} sizes="(min-width: 768px) 30rem, 20rem" class="h-auto w-full" loading="eager" />
         </div>
       ) : (
         <div class="photo-frame">

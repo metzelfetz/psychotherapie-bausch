@@ -1,0 +1,56 @@
+---
+// One practice location: weekdays, the section's sentence about it, billing
+// options and address (facts from src/data/practice.ts), then its map.
+import Map from './Map.astro';
+import type { Location } from '../data/practice';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  location: Location;
+  /** The section's sentence introducing the billing list. */
+  text: string;
+}
+
+const { lang, location, text } = Astro.props;
+const tr = t(lang);
+const labelClass = 'mb-1 text-[0.8rem] font-semibold uppercase tracking-[0.14em] text-muted';
+---
+
+<article class="reveal flex flex-col gap-6 rounded-[2rem] border border-base-300 bg-base-100 p-6 md:p-8">
+  <header class="flex items-start gap-3">
+    <svg class="mt-1.5 h-7 w-7 flex-none text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.3" />
+    </svg>
+    <div>
+      <h3 class="text-[clamp(1.6rem,2.6vw,2rem)]">{tr('location.prefix')} {location.city}</h3>
+      <p class="mt-1 font-semibold text-secondary-content">{location.days[lang]}</p>
+    </div>
+  </header>
+
+  <div>
+    <p class="mb-3">{text}</p>
+    <ul class="flex flex-col gap-1.5">
+      {location.billing[lang].map((item) => (
+        <li class="relative pl-6">
+          <svg class="absolute top-[0.45em] left-0 h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 7.5" />
+          </svg>
+          {item}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div>
+    <p class={labelClass}>{tr('location.address')}</p>
+    <address class="not-italic">
+      {location.street}<br />
+      {location.postalCode} {location.city}
+    </address>
+  </div>
+
+  <div class="mt-auto">
+    <Map lang={lang} lat={location.geo.lat} lng={location.geo.lng} place={location.city} />
+  </div>
+</article>

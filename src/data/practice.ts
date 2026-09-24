@@ -2,17 +2,13 @@
 export const practice = {
   name: 'Dr. Paul Bausch',
   practiceName: {
-    de: 'Privatpraxis für Psychotherapie',
-    en: 'Private Practice for Psychotherapy',
+    de: 'Praxis für Psychotherapie',
+    en: 'Practice for Psychotherapy',
   },
   tagline: {
-    de: 'Psychologischer Psychotherapeut | Verhaltenstherapie',
-    en: 'Psychological Psychotherapist | Behavioural Therapy',
+    de: 'Dr. phil. Paul Bausch · Psychologischer Psychotherapeut',
+    en: 'Dr. phil. Paul Bausch · Psychological Psychotherapist',
   },
-  street: 'Bußstraße 17',
-  postalCode: '79102',
-  city: 'Freiburg',
-  cityLong: { de: 'Freiburg i.Br.', en: 'Freiburg im Breisgau' },
   country: { de: 'Deutschland', en: 'Germany' },
   phone: {
     href: 'tel:+4915786444932',
@@ -20,8 +16,41 @@ export const practice = {
   },
   email: 'mail@psychotherapie-bausch.de',
   mailSubject: { de: 'Anmeldung Erstgespräch', en: 'Initial consultation' },
-  geo: { lat: 47.98642281388925, lng: 7.866758820957796 },
 } as const;
+
+// The two practice locations, in Paul's order (his text of 2026-09-24).
+// Coordinates: the building's OSM centroid (Nominatim, looked up once).
+export const locations = [
+  {
+    id: 'schopfheim',
+    city: 'Schopfheim',
+    street: 'Steinhäußlerstr. 10',
+    postalCode: '79650',
+    days: { de: 'Montag bis Mittwoch', en: 'Monday to Wednesday' },
+    billing: {
+      de: ['Alle gesetzlichen Krankenkassen', 'Private Krankenversicherungen & Beihilfe', 'Selbstzahler'],
+      en: ['All statutory health insurers', 'Private health insurance & Beihilfe', 'Self-payers'],
+    },
+    geo: { lat: 47.6485758, lng: 7.8261394 },
+  },
+  {
+    id: 'freiburg',
+    city: 'Freiburg',
+    street: 'Bußstraße 17',
+    postalCode: '79102',
+    days: { de: 'Donnerstag und Freitag', en: 'Thursday and Friday' },
+    billing: {
+      de: ['Private Krankenversicherungen & Beihilfe', 'Selbstzahler'],
+      en: ['Private health insurance & Beihilfe', 'Self-payers'],
+    },
+    geo: { lat: 47.98642281388925, lng: 7.866758820957796 },
+  },
+] as const;
+
+export type Location = (typeof locations)[number];
+
+/** "Schopfheim & Freiburg", for the eyebrow. */
+export const cities = locations.map((l) => l.city).join(' & ');
 
 // Crisis lines for the footer note (approved by the user, 2026-09-23).
 export const crisisLines = {

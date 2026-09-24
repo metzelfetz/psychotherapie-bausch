@@ -1,6 +1,6 @@
 ---
-import { crisisLines, practice } from '../data/practice';
-import { pagesFor, urlFor } from '../i18n/pages';
+import { crisisLines, locations, practice } from '../data/practice';
+import { pagesFor, sectionsFor, sectionUrl, urlFor } from '../i18n/pages';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -11,24 +11,27 @@ const { lang } = Astro.props;
 const tr = t(lang);
 // Lets a narrow column wrap the address after the @, not mid-word.
 const emailParts = practice.email.split('@');
-const pages = await pagesFor(lang);
-const navPages = pages.filter((p) => p.data.nav);
-const legalPages = pages.filter((p) => p.data.layout === 'legal');
+const sections = await sectionsFor(lang);
+const legalPages = (await pagesFor(lang)).filter((p) => p.data.layout === 'legal');
 const labelClass = 'mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-neutral-content';
 const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:decoration-base-100';
 ---
 
 <footer class="bg-neutral px-4 pt-12 pb-6 text-base-100 md:pt-18">
   <div class="mx-auto max-w-6xl">
-    <div class="grid gap-7 md:grid-cols-[1.3fr_1fr_1fr] md:gap-10">
+    <div class="grid gap-7 md:grid-cols-[1.5fr_1.2fr_1fr] md:gap-10">
       <div>
-        <p class="mb-1 font-serif text-2xl">{practice.name}</p>
-        <address class="not-italic leading-relaxed text-neutral-content">
-          {practice.practiceName[lang]}<br />
-          {practice.street}<br />
-          {practice.postalCode} {practice.city}<br />
-          {practice.country[lang]}
-        </address>
+        <p class="mb-1 font-serif text-2xl">{practice.practiceName[lang]}</p>
+        <p class="mb-4 text-neutral-content">{practice.tagline[lang]}</p>
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          {locations.map((l) => (
+            <address class="not-italic leading-relaxed text-neutral-content">
+              <span class="font-semibold text-base-100">{tr('location.prefix')} {l.city}</span><br />
+              {l.street}<br />
+              {l.postalCode} {l.city}
+            </address>
+          ))}
+        </div>
       </div>
       <div>
         <p class={labelClass}>{tr('footer.contact')}</p>
@@ -38,8 +41,8 @@ const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:dec
       <nav aria-label={tr('footer.pages')}>
         <p class={labelClass}>{tr('footer.pages')}</p>
         <ul class="flex flex-col gap-1">
-          {navPages.map((p) => (
-            <li><a class={linkClass} href={urlFor(lang, p.data.slug)}>{p.data.title}</a></li>
+          {sections.map((s) => (
+            <li><a class={linkClass} href={sectionUrl(lang, s)}>{s.data.navLabel}</a></li>
           ))}
         </ul>
       </nav>
