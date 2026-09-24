@@ -19,9 +19,13 @@ const pages = defineCollection({
       layout: z.enum(['page', 'legal']).default('page'),
       hero: z
         .object({
+          // On the one-pager the hero is its first nav entry ("Willkommen").
+          anchor: z.string().optional(),
+          navLabel: z.string().optional(),
           title: z.string(),
           lead: z.string().optional(),
-          text: z.string(),
+          // One string per paragraph.
+          text: z.array(z.string()),
           image: image(),
           imageAlt: z.string(),
           // 'photo': landscape photo in an arch. 'portrait': a cut-out portrait
@@ -38,14 +42,16 @@ const pages = defineCollection({
 });
 
 // The one-pager's sections: src/content/sections/<lang>/<name>.md, each an
-// `#anchor` on the home page and an entry in the header and footer nav.
+// `#anchor` on the home page below the hero.
 const sections = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/sections' }),
   schema: z.object({
-    // Section heading (h2). Omitted when the hero already carries it.
-    title: z.string().optional(),
+    // Section heading (h2).
+    title: z.string(),
     anchor: z.string(),
-    navLabel: z.string(),
+    // Entry in the header and footer nav; sections without one are reached
+    // by scrolling (e.g. "Schwerpunkte", part of the Willkommen block).
+    navLabel: z.string().optional(),
     order: z.number(),
     translationKey: z.string(),
     // CV rows, rendered as a timeline after the text. `text` may hold HTML.

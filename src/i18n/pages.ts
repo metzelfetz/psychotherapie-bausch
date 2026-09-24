@@ -32,7 +32,19 @@ export async function sectionsFor(lang: Lang) {
   return all.filter((s) => s.id.startsWith(`${lang}/`)).sort((a, b) => a.data.order - b.data.order);
 }
 
-/** A section's anchor on the home page; works from any page. */
-export function sectionUrl(lang: Lang, section: Section) {
-  return `${urlFor(lang, '')}#${section.data.anchor}`;
+/** An anchor on the home page; works from any page. */
+export function anchorUrl(lang: Lang, anchor: string) {
+  return `${urlFor(lang, '')}#${anchor}`;
+}
+
+/** Header and footer nav: the home hero ("Willkommen"), then every section
+ *  that has a navLabel. */
+export async function navFor(lang: Lang) {
+  const home = (await pagesFor(lang)).find((p) => p.data.slug === '');
+  const hero = home?.data.hero;
+  const entries = hero?.anchor && hero.navLabel ? [{ anchor: hero.anchor, label: hero.navLabel }] : [];
+  for (const s of await sectionsFor(lang)) {
+    if (s.data.navLabel) entries.push({ anchor: s.data.anchor, label: s.data.navLabel });
+  }
+  return entries.map((e) => ({ href: anchorUrl(lang, e.anchor), label: e.label }));
 }

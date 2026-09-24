@@ -9,7 +9,10 @@ interface Props {
   eyebrow: string;
   title: string;
   lead?: string;
-  text: string;
+  /** One string per paragraph. */
+  text: string[];
+  /** Anchor id, when the hero is a nav target on the one-pager. */
+  anchor?: string;
   image: ImageMetadata;
   imageAlt: string;
   variant: 'photo' | 'portrait';
@@ -17,14 +20,14 @@ interface Props {
   next?: { href: string; title: string };
 }
 
-const { lang, eyebrow, title, lead, text, image, imageAlt, variant, next } = Astro.props;
+const { lang, eyebrow, title, lead, text, image, imageAlt, variant, next, anchor } = Astro.props;
 const tr = t(lang);
 // A title ending in a comma ("Schön,") continues into the lead, so both
 // share one headline; otherwise the lead is its own line below it.
 const leadInline = lead && title.trimEnd().endsWith(',');
 ---
 
-<section class="px-4 pt-10 pb-12 md:pt-11 md:pb-20">
+<section id={anchor} class="scroll-mt-15 px-4 pt-5 pb-12 md:scroll-mt-18 md:pt-11 md:pb-20">
   <div class="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1fr_1.05fr] md:gap-16">
     <div class="hero-copy">
       <p class="eyebrow">{eyebrow}</p>
@@ -38,7 +41,9 @@ const leadInline = lead && title.trimEnd().endsWith(',');
       {lead && !leadInline && (
         <p class="mt-2.5 font-serif text-[clamp(1.5rem,2.6vw,2rem)] leading-tight text-primary italic">{lead}</p>
       )}
-      <p class="mt-6 mb-8 max-w-[34rem]">{text}</p>
+      <div class="mt-6 mb-8 flex max-w-[34rem] flex-col gap-4">
+        {text.map((p) => <p>{p}</p>)}
+      </div>
       <div class="flex flex-wrap items-center gap-3">
         <a href={mailto(lang)} class="btn btn-primary btn-lg">{tr('cta.email')}</a>
         {next && (

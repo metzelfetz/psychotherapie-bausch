@@ -1,5 +1,5 @@
 ---
-import { sectionsFor, sectionUrl, urlFor } from '../i18n/pages';
+import { navFor, urlFor } from '../i18n/pages';
 import { languages, t, type Lang } from '../i18n/ui';
 import { mailto, practice } from '../data/practice';
 
@@ -10,8 +10,8 @@ interface Props {
 
 const { lang, alternateUrl } = Astro.props;
 const tr = t(lang);
-// The nav links are the one-pager's section anchors.
-const nav = (await sectionsFor(lang)).map((s) => ({ href: sectionUrl(lang, s), label: s.data.navLabel }));
+// The nav links are anchors on the one-pager.
+const nav = await navFor(lang);
 const otherLang: Lang = lang === 'de' ? 'en' : 'de';
 // Split at the "·" so a narrow screen wraps the subline between its parts.
 const taglineParts = practice.tagline[lang].split(' · ');

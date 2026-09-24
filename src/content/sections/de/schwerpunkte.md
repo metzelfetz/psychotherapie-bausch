@@ -1,13 +1,9 @@
 ---
-anchor: willkommen
-navLabel: Willkommen
+title: Behandlungsschwerpunkte & Methodik
+anchor: schwerpunkte
 order: 1
-translationKey: welcome
+translationKey: focus
 ---
-
-Mein therapeutischer Ansatz basiert auf Transparenz, klarer Struktur und einer echten Begegnung auf Augenhöhe. Gemeinsam betrachten wir die tieferen Muster Ihres Denkens, Fühlens und Handelns, um passgenaue, wirksame Wege aus der Krise zu erarbeiten.
-
-## Behandlungsschwerpunkte & Methodik
 
 Den Kern meiner therapeutischen Arbeit bildet die moderne Verhaltenstherapie – ein lösungsorientiertes Verfahren, das direkt an Ihrer aktuellen Lebensrealität ansetzt. Je nach Ihrer individuellen Problemstellung ergänze ich diesen Kern um emotionsfokussierte und erlebnisbasierte Methoden sowie um bewährte Achtsamkeits-, Akzeptanz- und Entspannungsverfahren.
 

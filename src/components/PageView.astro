@@ -57,7 +57,7 @@ const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
     </section>
   ) : (
     <>
-      {sections.map(({ title, anchor, navLabel, cv, links, locations: cards, Content: SectionContent }, i) => (
+      {sections.map(({ title, anchor, cv, links, locations: cards, Content: SectionContent }, i) => (
         <>
           {band && i === sections.length - 1 && (
             <div class="px-4 pb-14 md:pb-24">
@@ -74,13 +74,12 @@ const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
           )}
           <section
             id={anchor}
-            aria-label={title ? undefined : navLabel}
-            aria-labelledby={title ? `${anchor}-title` : undefined}
+            aria-labelledby={`${anchor}-title`}
             class:list={['scroll-mt-15 px-4 py-14 md:scroll-mt-18 md:py-24', i % 2 === 0 ? 'bg-base-200' : 'bg-base-100']}
           >
             <div class="mx-auto max-w-6xl">
               <Prose lead>
-                {title && <h2 id={`${anchor}-title`}>{title}</h2>}
+                <h2 id={`${anchor}-title`}>{title}</h2>
                 <SectionContent />
               </Prose>
 

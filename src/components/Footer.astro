@@ -1,6 +1,6 @@
 ---
 import { crisisLines, locations, practice } from '../data/practice';
-import { pagesFor, sectionsFor, sectionUrl, urlFor } from '../i18n/pages';
+import { navFor, pagesFor, urlFor } from '../i18n/pages';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -11,7 +11,7 @@ const { lang } = Astro.props;
 const tr = t(lang);
 // Lets a narrow column wrap the address after the @, not mid-word.
 const emailParts = practice.email.split('@');
-const sections = await sectionsFor(lang);
+const nav = await navFor(lang);
 const legalPages = (await pagesFor(lang)).filter((p) => p.data.layout === 'legal');
 const labelClass = 'mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-neutral-content';
 const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:decoration-base-100';
@@ -41,8 +41,8 @@ const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:dec
       <nav aria-label={tr('footer.pages')}>
         <p class={labelClass}>{tr('footer.pages')}</p>
         <ul class="flex flex-col gap-1">
-          {sections.map((s) => (
-            <li><a class={linkClass} href={sectionUrl(lang, s)}>{s.data.navLabel}</a></li>
+          {nav.map((n) => (
+            <li><a class={linkClass} href={n.href}>{n.label}</a></li>
           ))}
         </ul>
       </nav>
