@@ -1,5 +1,5 @@
 ---
-import { crisisLines, locations, practice } from '../data/practice';
+import { crisisLines, locations, mapsUrl, practice } from '../data/practice';
 import { pagesFor, urlFor } from '../i18n/pages';
 import { t, type Lang } from '../i18n/ui';
 
@@ -26,8 +26,7 @@ const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:dec
           {locations.map((l) => (
             <address class="not-italic leading-relaxed text-neutral-content">
               <span class="font-semibold text-base-100">{tr('location.prefix')} {l.city}</span><br />
-              {l.street}<br />
-              {l.postalCode} {l.city}
+              <a class={linkClass} href={mapsUrl(l)} target="_blank" rel="noopener">{l.street}<br />{l.postalCode} {l.city}</a>
             </address>
           ))}
         </div>

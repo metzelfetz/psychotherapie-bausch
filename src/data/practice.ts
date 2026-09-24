@@ -19,7 +19,8 @@ export const practice = {
 } as const;
 
 // The two practice locations, in Paul's order (his text of 2026-09-24).
-// Coordinates: the building's OSM centroid (Nominatim, looked up once).
+// Coordinates: the building's OSM centroid (Nominatim, looked up once), kept
+// for the JSON-LD (s4).
 export const locations = [
   {
     id: 'schopfheim',
@@ -55,6 +56,13 @@ export const crisisLines = {
   emergency: { href: 'tel:112', display: '112' },
   telefonSeelsorge: { href: 'tel:+498001110111', display: '0800 111 0 111' },
 } as const;
+
+// Google's universal Maps link: opens the Maps app on phones where it is
+// installed, the website otherwise. A plain link, so nothing loads before a click.
+export function mapsUrl(l: Location) {
+  const query = `${l.street}, ${l.postalCode} ${l.city}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
 
 export function mailto(lang: 'de' | 'en') {
   return `mailto:${practice.email}?subject=${encodeURIComponent(practice.mailSubject[lang])}`;

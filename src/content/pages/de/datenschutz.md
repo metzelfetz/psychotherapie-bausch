@@ -29,9 +29,9 @@ Diese Internetseite wird als statische Seite bei GitHub Pages (GitHub, Inc., 88 
 
 Diese Internetseite verwendet die Schriftarten Newsreader und Source Sans 3. Die Schriftdateien liegen lokal auf dem Server und werden direkt mit der Seite ausgeliefert; es findet keine Verbindung zu Google Fonts oder einem anderen externen Schriftanbieter statt.
 
-## Karten im Abschnitt "Standorte"
+## Links zu Google Maps
 
-Im Abschnitt "Standorte" können auf Wunsch Kartenansichten der beiden Praxisadressen eingeblendet werden. Diese werden erst nach einem bewussten Klick auf "Karte laden" geladen. Erst dann wird eine Verbindung zu den Kartenkacheln von OpenStreetMap (OpenStreetMap Foundation, St John's Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes Königreich) hergestellt, wobei Ihre IP-Adresse an deren Server übermittelt wird. Näheres regelt die Datenschutzerklärung der OpenStreetMap Foundation, abrufbar unter [osmfoundation.org/wiki/Privacy_Policy](https://osmfoundation.org/wiki/Privacy_Policy).
+Die Praxisadressen sind mit Google Maps verlinkt. Auf dieser Internetseite selbst wird keine Karte eingebunden, und ohne Ihren Klick werden keine Daten an Google übertragen. Erst wenn Sie einen dieser Links anklicken, öffnet sich Google Maps (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) in einem neuen Fenster oder in der App; ab dann gilt die Datenschutzerklärung von Google, abrufbar unter [policies.google.com/privacy](https://policies.google.com/privacy).
 
 ## Erfassung von allgemeinen Daten und Informationen
 
