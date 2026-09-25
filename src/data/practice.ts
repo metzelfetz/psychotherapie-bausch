@@ -57,13 +57,6 @@ export const crisisLines = {
   telefonSeelsorge: { href: 'tel:+498001110111', display: '0800 111 0 111' },
 } as const;
 
-// Google's universal Maps link: opens the Maps app on phones where it is
-// installed, the website otherwise. A plain link, so nothing loads before a click.
-export function mapsUrl(l: Location) {
-  const query = `${l.street}, ${l.postalCode} ${l.city}`;
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-}
-
 export function mailto(lang: 'de' | 'en') {
   return `mailto:${practice.email}?subject=${encodeURIComponent(practice.mailSubject[lang])}`;
 }

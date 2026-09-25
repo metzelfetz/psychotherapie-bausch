@@ -5,7 +5,7 @@ order: 1
 translationKey: focus
 ---
 
-Den Kern meiner therapeutischen Arbeit bildet die moderne Verhaltenstherapie – ein lösungsorientiertes Verfahren, das direkt an Ihrer aktuellen Lebensrealität ansetzt. Je nach Ihrer individuellen Problemstellung ergänze ich diesen Kern um emotionsfokussierte und erlebnisbasierte Methoden sowie um bewährte Achtsamkeits-, Akzeptanz- und Entspannungsverfahren.
+Den Kern meiner therapeutischen Arbeit bildet die **moderne Verhaltenstherapie** – ein lösungsorientiertes Verfahren, das direkt an Ihrer aktuellen Lebensrealität ansetzt. Je nach Ihrer individuellen Problemstellung ergänze ich diesen Kern um emotionsfokussierte und erlebnisbasierte Methoden sowie um bewährte Achtsamkeits-, Akzeptanz- und Entspannungsverfahren.
 
 ### Klinische Schwerpunkte:
 

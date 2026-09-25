@@ -31,8 +31,6 @@ const sections = isHome
       (await sectionsFor(lang)).map(async (s) => ({ ...s.data, Content: (await render(s)).Content })),
     )
   : [];
-const first = sections[0];
-const more = first && { href: `#${first.anchor}`, title: tr('hero.more') };
 const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
 ---
 
@@ -43,7 +41,7 @@ const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
   noindex={layout === 'legal'}
   alternateUrl={alternateUrl}
 >
-  {hero && <Hero lang={lang} {...hero} next={more} />}
+  {hero && <Hero lang={lang} {...hero} />}
 
   {layout === 'legal' ? (
     <section class="px-4 pt-12 pb-20 md:pt-20">

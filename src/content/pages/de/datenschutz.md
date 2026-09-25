@@ -29,10 +29,6 @@ Diese Internetseite wird als statische Seite bei GitHub Pages (GitHub, Inc., 88 
 
 Diese Internetseite verwendet die Schriftarten Newsreader und Source Sans 3. Die Schriftdateien liegen lokal auf dem Server und werden direkt mit der Seite ausgeliefert; es findet keine Verbindung zu Google Fonts oder einem anderen externen Schriftanbieter statt.
 
-## Links zu Google Maps
-
-Die Praxisadressen sind mit Google Maps verlinkt. Auf dieser Internetseite selbst wird keine Karte eingebunden, und ohne Ihren Klick werden keine Daten an Google übertragen. Erst wenn Sie einen dieser Links anklicken, öffnet sich Google Maps (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) in einem neuen Fenster oder in der App; ab dann gilt die Datenschutzerklärung von Google, abrufbar unter [policies.google.com/privacy](https://policies.google.com/privacy).
-
 ## Erfassung von allgemeinen Daten und Informationen
 
 Die Internetseite der Privatpraxis für Psychotherapie erfasst mit jedem Aufruf der Internetseite durch eine betroffene Person oder ein automatisiertes System eine Reihe von allgemeinen Daten und Informationen. Diese allgemeinen Daten und Informationen werden in den Logfiles des Servers gespeichert. Erfasst werden können die (1) verwendeten Browsertypen und Versionen, (2) das vom zugreifenden System verwendete Betriebssystem, (3) die Internetseite, von welcher ein zugreifendes System auf unsere Internetseite gelangt (sogenannte Referrer), (4) die Unterwebseiten, welche über ein zugreifendes System auf unserer Internetseite angesteuert werden, (5) das Datum und die Uhrzeit eines Zugriffs auf die Internetseite, (6) eine Internet-Protokoll-Adresse (IP-Adresse), (7) der Internet-Service-Provider des zugreifenden Systems und (8) sonstige ähnliche Daten und Informationen, die der Gefahrenabwehr im Falle von Angriffen auf unsere informationstechnologischen Systeme dienen.

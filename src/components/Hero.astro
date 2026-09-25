@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { mailto } from '../data/practice';
+import { mailto, practice } from '../data/practice';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -16,11 +16,9 @@ interface Props {
   image: ImageMetadata;
   imageAlt: string;
   variant: 'photo' | 'portrait';
-  /** Secondary link, to the first section of the one-pager. */
-  next?: { href: string; title: string };
 }
 
-const { lang, eyebrow, title, lead, text, image, imageAlt, variant, next, anchor } = Astro.props;
+const { lang, eyebrow, title, lead, text, image, imageAlt, variant, anchor } = Astro.props;
 const tr = t(lang);
 // A title ending in a comma ("Schön,") continues into the lead, so both
 // share one headline; otherwise the lead is its own line below it.
@@ -44,13 +42,12 @@ const leadInline = lead && title.trimEnd().endsWith(',');
       <div class="mt-6 mb-8 flex max-w-[34rem] flex-col gap-4">
         {text.map((p) => <p>{p}</p>)}
       </div>
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-3">
         <a href={mailto(lang)} class="btn btn-primary btn-lg">{tr('cta.email')}</a>
-        {next && (
-          <a href={next.href} class="btn btn-lg btn-outline border-primary text-secondary-content hover:bg-primary/10 hover:text-secondary-content">
-            {next.title} <span class="arrow" aria-hidden="true">→</span>
-          </a>
-        )}
+        <!-- Plain text, not a link, so the address can be copied into any mail program. -->
+        <p class="text-secondary-content">
+          {tr('cta.address')} <span class="font-semibold whitespace-nowrap select-all">{practice.email}</span>
+        </p>
       </div>
     </div>
     <div class="hero-media -order-1 md:order-none">

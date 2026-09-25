@@ -1,7 +1,7 @@
 ---
 // One practice location: weekdays, the section's sentence about it, billing
-// options and address (facts from src/data/practice.ts), linked to Google Maps.
-import { mapsUrl, type Location } from '../data/practice';
+// options and address (facts from src/data/practice.ts).
+import { type Location } from '../data/practice';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -47,17 +47,9 @@ const labelClass = 'mb-1 text-[0.8rem] font-semibold uppercase tracking-[0.14em]
 
   <div class="mt-auto">
     <p class={labelClass}>{tr('location.address')}</p>
-    <a href={mapsUrl(location)} target="_blank" rel="noopener" class="group inline-block no-underline">
-      <address class="not-italic">
-        {location.street}<br />
-        {location.postalCode} {location.city}
-      </address>
-      <span class="mt-2 inline-flex items-center gap-1.5 font-semibold text-secondary-content underline decoration-primary/40 underline-offset-4 group-hover:decoration-primary">
-        {tr('location.maps')}
-        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
-        </svg>
-      </span>
-    </a>
+    <address class="not-italic">
+      {location.street}<br />
+      {location.postalCode} {location.city}
+    </address>
   </div>
 </article>

@@ -1,5 +1,5 @@
 ---
-import { crisisLines, locations, mapsUrl, practice } from '../data/practice';
+import { crisisLines, locations, practice } from '../data/practice';
 import { pagesFor, urlFor } from '../i18n/pages';
 import { t, type Lang } from '../i18n/ui';
 
@@ -26,15 +26,15 @@ const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:dec
           {locations.map((l) => (
             <address class="not-italic leading-relaxed text-neutral-content">
               <span class="font-semibold text-base-100">{tr('location.prefix')} {l.city}</span><br />
-              <a class={linkClass} href={mapsUrl(l)} target="_blank" rel="noopener">{l.street}<br />{l.postalCode} {l.city}</a>
+              {l.street}<br />{l.postalCode} {l.city}
             </address>
           ))}
         </div>
       </div>
       <div>
         <p class={labelClass}>{tr('footer.contact')}</p>
-        <p class="mb-1">{tr('footer.phone')}: <a class={linkClass} href={practice.phone.href}>{practice.phone.display}</a></p>
-        <p>{tr('footer.email')}: <a class={linkClass} href={`mailto:${practice.email}`}>{emailParts[0]}@<wbr />{emailParts[1]}</a></p>
+        <p class="mb-1">{tr('footer.email')}: <a class={linkClass} href={`mailto:${practice.email}`}>{emailParts[0]}@<wbr />{emailParts[1]}</a></p>
+        <p>{tr('footer.phone')}: <a class={linkClass} href={practice.phone.href}>{practice.phone.display}</a></p>
       </div>
     </div>
 
