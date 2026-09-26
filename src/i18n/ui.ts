@@ -6,7 +6,6 @@ export const ui = {
   de: {
     'nav.label': 'Hauptnavigation',
     'nav.menu': 'Menü',
-    'lang.switch': 'Sprache wählen',
     'cta.email': 'E-Mail senden',
     'footer.phone': 'Telefon',
     'footer.email': 'E-Mail',
@@ -28,7 +27,6 @@ export const ui = {
   en: {
     'nav.label': 'Main navigation',
     'nav.menu': 'Menu',
-    'lang.switch': 'Choose language',
     'cta.email': 'Send an email',
     'footer.phone': 'Phone',
     'footer.email': 'Email',

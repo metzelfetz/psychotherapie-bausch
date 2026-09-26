@@ -3,8 +3,11 @@
 @import "@fontsource-variable/source-sans-3/wght.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+/* Only the DaisyUI parts the site uses (the button, plus the base layer):
+   the full set tripled the stylesheet, which blocks the first paint (s5). */
 @plugin "daisyui" {
   themes: false;
+  include: button, properties, rootcolor, rootscrollgutter, rootscrolllock, scrollbar, svg;
 }
 
 /*

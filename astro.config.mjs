@@ -22,6 +22,9 @@ export default defineConfig({
     sitemap({
       // Legal pages are noindex, keep them out of the sitemap too.
       filter: (page) => !/\/(impressum|datenschutz|legal-notice|privacy)\/?$/.test(page),
+      // Pairs / with /en/ as hreflang alternates (same path under the prefix).
+      i18n: { defaultLocale: 'de', locales: { de: 'de-DE', en: 'en-GB' } },
+      lastmod: new Date(),
     }),
   ],
   vite: {

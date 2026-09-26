@@ -4,6 +4,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { t, type Lang } from '../i18n/ui';
 import { practice } from '../data/practice';
+// The heading font's main file, preloaded: the header's practice name is the
+// largest paint on phones and waits for it (Lighthouse, s5).
+import headingFont from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url';
 
 interface Props {
   lang: Lang;
@@ -28,6 +31,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 // Any build not for the real domain (the GitHub Pages staging URL) stays out
 // of search engines, so staging never competes with psychotherapie-bausch.de.
 const isProduction = Astro.site?.hostname === 'psychotherapie-bausch.de';
+const ogImage = new URL(`${base}og-image.jpg`, Astro.site);
+const ogLocale = { de: 'de_DE', en: 'en_GB' } as const;
 ---
 
 <!doctype html>
@@ -42,12 +47,21 @@ const isProduction = Astro.site?.hostname === 'psychotherapie-bausch.de';
     <link rel="alternate" hreflang={lang} href={canonical} />
     {alternate && <link rel="alternate" hreflang={otherLang} href={alternate} />}
     {xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/png" href={`${base}logo.png`} />
+    <meta name="theme-color" content="#f6f3ec" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
+    <meta property="og:locale" content={ogLocale[lang]} />
+    {alternate && <meta property="og:locale:alternate" content={ogLocale[otherLang]} />}
+    <meta property="og:site_name" content={`${practice.practiceName[lang]} ${practice.name}`} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${practice.name}, ${practice.tagline[lang].split(' · ')[1]}`} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>

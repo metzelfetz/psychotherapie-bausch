@@ -32,7 +32,16 @@ const sections = isHome
       (await sectionsFor(lang)).map(async (s) => ({ ...s.data, Content: (await render(s)).Content })),
     )
   : [];
-const jsonLd = isHome ? practiceJsonLd(lang, new URL(urlFor(lang, ''), Astro.site).toString()) : undefined;
+const jsonLd =
+  isHome && hero
+    ? practiceJsonLd({
+        lang,
+        homeUrl: new URL(urlFor(lang, ''), Astro.site).toString(),
+        description: page.data.description,
+        image: new URL(hero.image.src, Astro.site).toString(),
+        sameAs: sections.flatMap((s) => s.links?.items.map((l) => l.href) ?? []),
+      })
+    : undefined;
 const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
 ---
 
