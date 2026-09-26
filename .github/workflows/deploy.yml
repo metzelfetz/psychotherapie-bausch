@@ -1,11 +1,14 @@
-# Builds the site and publishes it to GitHub Pages on every push to main.
-# Official actions only (plan.md). SITE_URL and BASE_PATH come from the repo
-# variables: the staging URL now, the custom domain after the cut-over.
-name: Deploy to GitHub Pages
+# Two branches (plan.md, "Two branches, no staging URL"):
+# - main is staging: every push only builds the site, as a check.
+# - production is live: every push builds and publishes to GitHub Pages.
+# Publishing is a fast-forward merge of main into production (README, Deploy).
+# Official actions only. SITE_URL and BASE_PATH are optional repo variables;
+# without them the build targets https://psychotherapie-bausch.de/.
+name: Build and deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, production]
   workflow_dispatch:
 
 permissions:
@@ -14,7 +17,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -31,11 +34,13 @@ jobs:
         env:
           SITE_URL: ${{ vars.SITE_URL }}
           BASE_PATH: ${{ vars.BASE_PATH }}
-      - uses: actions/upload-pages-artifact@v5
+      - if: github.ref_name == 'production'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
   deploy:
+    if: github.ref_name == 'production'
     needs: build
     runs-on: ubuntu-latest
     environment:

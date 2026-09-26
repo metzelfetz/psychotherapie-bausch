@@ -3,8 +3,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// SITE_URL / BASE_PATH let the same code build for the GitHub Pages staging URL
-// (https://metzelfetz.github.io/psychotherapie-bausch/) and the custom domain.
+// SITE_URL / BASE_PATH are optional overrides (README, Deploy); the default is
+// the custom domain.
 const site = process.env.SITE_URL || 'https://psychotherapie-bausch.de';
 const base = process.env.BASE_PATH || '/';
 

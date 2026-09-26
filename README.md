@@ -41,18 +41,31 @@ The whole palette is in `src/styles/global.css`: the `bausch` theme block (prima
 
 ## Deploy
 
-Every push to `main` builds and publishes the site to GitHub Pages (`.github/workflows/deploy.yml`, official actions only). The run takes about a minute; follow it under the repo's Actions tab or with `gh run list`.
+Two branches, both built by `.github/workflows/deploy.yml` (official actions only):
 
-### Staging vs. the real domain: `SITE_URL` and `BASE_PATH`
-
-The same code builds for the staging URL and for the custom domain. Two repository variables (Settings → Secrets and variables → Actions → Variables) select which:
-
-| | `SITE_URL` | `BASE_PATH` |
+| Branch | Role | What a push does |
 |---|---|---|
-| Staging | `https://metzelfetz.github.io` | `/psychotherapie-bausch` |
-| Custom domain | `https://psychotherapie-bausch.de` | `/` (or leave unset) |
+| `main` | Staging: all work lands here | Builds the site as a check, publishes nothing |
+| `production` | The live site, `https://psychotherapie-bausch.de` | Builds and publishes to GitHub Pages |
 
-Without them the build defaults to the custom domain (`astro.config.mjs`). Any build whose host is not `psychotherapie-bausch.de` marks every page `noindex`, so staging never shows up in search engines. Internal links go through `import.meta.env.BASE_URL`, so they work under both.
+There is no staging URL: GitHub Pages serves one site per repository. Preview `main` locally instead:
+
+```bash
+npm run dev       # live-reloading preview on http://localhost:4321
+npm run build && npm run preview   # the exact production build
+```
+
+To publish, fast-forward `production` to `main` and push:
+
+```bash
+git checkout production && git merge --ff-only main && git push && git checkout main
+```
+
+A run takes about a minute; follow it under the repo's Actions tab or with `gh run list`. Never commit on `production` directly, so the fast-forward always works.
+
+### `SITE_URL` and `BASE_PATH`
+
+The build targets `https://psychotherapie-bausch.de/` by default (`astro.config.mjs`). Two optional repository variables (Settings → Secrets and variables → Actions → Variables) override it, for example to build for another host or a sub-path. Any build whose host is not `psychotherapie-bausch.de` marks every page `noindex`. Internal links go through `import.meta.env.BASE_URL`, so they work under any base path.
 
 ## Principles
 
