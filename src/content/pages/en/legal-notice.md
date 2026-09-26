@@ -35,8 +35,6 @@ KVBW (for the Schopfheim location), physician register LANR 8676995
 **Professional regulations**\
 The Psychotherapists Act (Psychotherapeutengesetz, PsychThG) and the professional code of the Landespsychotherapeutenkammer Baden-Württemberg apply, available at [www.lpk-bw.de](https://www.lpk-bw.de).
 
-<mark class="review">For review: see the note on the German page.</mark>
-
 **Legal notice | Disclaimer**\
 Dr. Paul Bausch, Diplom-Psychologe (graduate psychologist), Dr. phil. in psychology, University of Freiburg, psychological psychotherapist.
 

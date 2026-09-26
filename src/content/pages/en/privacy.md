@@ -36,8 +36,6 @@ The legal basis is Art. 6(1)(f) GDPR: the legitimate interest lies in delivering
 
 The practice itself has no access to these log files and does not analyse them.
 
-<mark class="review">For review: see the note on the German page.</mark>
-
 ## Fonts
 
 This website uses the fonts Newsreader and Source Sans 3. The font files are stored locally on the server and delivered with the page; no connection is made to Google Fonts or any other external font provider.
@@ -48,21 +46,15 @@ If you contact the practice by email or phone, your details (such as name, conta
 
 Please note that ordinary email is transmitted unencrypted. Please only mention your concern briefly; we will discuss detailed information about your health in person.
 
-<mark class="review">For review: new section.</mark>
-
 ## Links to other websites
 
 This website contains links to other providers (e.g. ResearchGate). When you click one, you leave this website, and the privacy policy of the respective provider applies from then on. No data is transferred to these providers before the click.
-
-<mark class="review">For review: new section.</mark>
 
 ## Your rights
 
 You have the right to access the data stored about you (Art. 15 GDPR), to rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18) and data portability (Art. 20), and the right to object to processing based on Art. 6(1)(f) GDPR (Art. 21). To exercise these rights, please use the contact details above.
 
 You also have the right to lodge a complaint with a data protection supervisory authority (Art. 77 GDPR). The competent authority is the Landesbeauftragter für den Datenschutz und die Informationsfreiheit Baden-Württemberg, the data protection commissioner of Baden-Württemberg ([www.baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)).
-
-<mark class="review">For review: new section.</mark>
 
 As of September 2026
 

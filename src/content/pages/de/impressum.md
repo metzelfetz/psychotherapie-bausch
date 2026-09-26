@@ -35,8 +35,6 @@ KVBW (für den Standort Schopfheim), Arztregister LANR 8676995
 **Berufsrechtliche Regelungen**\
 Es gelten das Psychotherapeutengesetz (PsychThG) und die Berufsordnung der Landespsychotherapeutenkammer Baden-Württemberg, einsehbar unter [www.lpk-bw.de](https://www.lpk-bw.de).
 
-<mark class="review">Zur Prüfung: Bisher stand hier das PsychThG „vom 1.1.1999“. Seit dem 1.9.2020 gilt das neue PsychThG, und die Berufsordnung der Kammer fehlte. Bitte bestätigen oder korrigieren.</mark>
-
 **Impressum | Haftungshinweis**\
 Dr. Paul Bausch, Diplom-Psychologe, Dr. phil. in Psychologie, Universität Freiburg, Psychologischer Psychotherapeut.
 

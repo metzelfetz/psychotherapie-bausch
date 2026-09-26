@@ -36,8 +36,6 @@ Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: Das berechtigte Interesse liegt 
 
 Die Praxis selbst hat keinen Zugriff auf diese Logfiles und wertet sie nicht aus.
 
-<mark class="review">Zur Prüfung: Die Absätze zu Rechtsgrundlage und USA-Übermittlung sind neu. Der Satz „Die Praxis selbst hat keinen Zugriff …“ ersetzt den bisherigen Abschnitt „Erfassung von allgemeinen Daten und Informationen“, der eine eigene statistische Auswertung der Logfiles beschrieb – die gibt es bei GitHub Pages nicht.</mark>
-
 ## Schriftarten
 
 Diese Internetseite verwendet die Schriftarten Newsreader und Source Sans 3. Die Schriftdateien liegen lokal auf dem Server und werden direkt mit der Seite ausgeliefert; es findet keine Verbindung zu Google Fonts oder einem anderen externen Schriftanbieter statt.
@@ -48,20 +46,14 @@ Wenn Sie per E-Mail oder Telefon Kontakt aufnehmen, werden Ihre Angaben (etwa Na
 
 Bitte beachten Sie, dass eine gewöhnliche E-Mail unverschlüsselt übertragen wird. Nennen Sie darin deshalb nur kurz Ihr Anliegen; ausführliche Angaben zu Ihrer Gesundheit besprechen wir persönlich.
 
-<mark class="review">Zur Prüfung: Abschnitt neu.</mark>
-
 ## Links zu anderen Internetseiten
 
 Diese Internetseite enthält Links zu anderen Anbietern (z. B. ResearchGate). Beim Anklicken verlassen Sie diese Internetseite; ab dann gilt die Datenschutzerklärung des jeweiligen Anbieters. Vor dem Klick werden keine Daten an diese Anbieter übertragen.
-
-<mark class="review">Zur Prüfung: Abschnitt neu.</mark>
 
 ## Ihre Rechte
 
 Sie haben das Recht auf Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO), auf Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20) sowie das Recht, einer Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO zu widersprechen (Art. 21). Wenden Sie sich dazu an die oben genannten Kontaktdaten.
 
 Außerdem haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Zuständig ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg ([www.baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)).
-
-<mark class="review">Zur Prüfung: Abschnitt neu. Die ganze Datenschutzerklärung sollte einmal rechtlich geprüft werden.</mark>
 
 Stand: September 2026
