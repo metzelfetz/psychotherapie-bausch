@@ -6,31 +6,62 @@ translationKey: privacy
 layout: legal
 ---
 
-Datenschutz hat einen besonders hohen Stellenwert für die Privatpraxis für Psychotherapie von Herrn Dr. Paul Bausch. Bei der Nutzung dieser Internetseite werden keinerlei personenbezogene Daten erhoben, außer wo diese Erklärung es ausdrücklich nennt. Personenbezogene Daten (wie zum Beispiel Name, Anschrift, Geburtsdatum), die im telefonischen, persönlichen oder E-Mail-Kontakt erhoben werden, werden entsprechend der Datenschutz-Grundverordnung verarbeitet und verwahrt. Eine gesonderte Patienteninformation zum Datenschutz liegt dazu in der Praxis aus.
+Datenschutz hat einen besonders hohen Stellenwert für die Praxis für Psychotherapie von Herrn Dr. Paul Bausch. Bei der Nutzung dieser Internetseite werden keinerlei personenbezogene Daten erhoben, außer wo diese Erklärung es ausdrücklich nennt. Personenbezogene Daten (wie zum Beispiel Name, Anschrift, Geburtsdatum), die im telefonischen, persönlichen oder E-Mail-Kontakt erhoben werden, werden entsprechend der Datenschutz-Grundverordnung verarbeitet und verwahrt. Eine gesonderte Patienteninformation zum Datenschutz liegt dazu in der Praxis aus.
 
 ## Name und Anschrift des für die Verarbeitung Verantwortlichen
 
 Verantwortlicher im Sinne der Datenschutz-Grundverordnung, sonstiger in den Mitgliedstaaten der Europäischen Union geltenden Datenschutzgesetze und anderer Bestimmungen mit datenschutzrechtlichem Charakter ist die:
 
-Privatpraxis für Psychotherapie\
-Dr. Paul Bausch\
+Praxis für Psychotherapie\
+Dr. phil. Paul Bausch
+
+Standort Schopfheim\
+Steinhäußlerstr. 10\
+79650 Schopfheim
+
+Standort Freiburg\
 Bußstraße 17\
-79102 Freiburg\
+79102 Freiburg
+
 Deutschland\
-Tel.: +49 (0)157 86444932\
 E-Mail: mail@psychotherapie-bausch.de\
+Tel.: +49 (0)157 86444932\
 Website: www.psychotherapie-bausch.de
 
 ## Hosting
 
 Diese Internetseite wird als statische Seite bei GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Seite erhebt GitHub Pages automatisch technische Zugriffsdaten (u. a. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, verwendeter Browser) in Server-Logfiles. Diese Daten dienen ausschließlich der technischen Auslieferung und Absicherung der Seite und werden nicht mit anderen Datenquellen zusammengeführt. Näheres regelt die Datenschutzerklärung von GitHub, abrufbar unter [docs.github.com/site-policy](https://docs.github.com/en/site-policy).
 
+Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: Das berechtigte Interesse liegt in einer sicheren und zuverlässigen Auslieferung dieser Internetseite. GitHub ist nach dem EU-US Data Privacy Framework zertifiziert, auf dessen Grundlage die Übermittlung in die USA erfolgt (Angemessenheitsbeschluss der EU-Kommission vom 10.7.2023).
+
+Die Praxis selbst hat keinen Zugriff auf diese Logfiles und wertet sie nicht aus.
+
+<mark class="review">Zur Prüfung: Die Absätze zu Rechtsgrundlage und USA-Übermittlung sind neu. Der Satz „Die Praxis selbst hat keinen Zugriff …“ ersetzt den bisherigen Abschnitt „Erfassung von allgemeinen Daten und Informationen“, der eine eigene statistische Auswertung der Logfiles beschrieb – die gibt es bei GitHub Pages nicht.</mark>
+
 ## Schriftarten
 
 Diese Internetseite verwendet die Schriftarten Newsreader und Source Sans 3. Die Schriftdateien liegen lokal auf dem Server und werden direkt mit der Seite ausgeliefert; es findet keine Verbindung zu Google Fonts oder einem anderen externen Schriftanbieter statt.
 
-## Erfassung von allgemeinen Daten und Informationen
+## Kontakt per E-Mail oder Telefon
 
-Die Internetseite der Privatpraxis für Psychotherapie erfasst mit jedem Aufruf der Internetseite durch eine betroffene Person oder ein automatisiertes System eine Reihe von allgemeinen Daten und Informationen. Diese allgemeinen Daten und Informationen werden in den Logfiles des Servers gespeichert. Erfasst werden können die (1) verwendeten Browsertypen und Versionen, (2) das vom zugreifenden System verwendete Betriebssystem, (3) die Internetseite, von welcher ein zugreifendes System auf unsere Internetseite gelangt (sogenannte Referrer), (4) die Unterwebseiten, welche über ein zugreifendes System auf unserer Internetseite angesteuert werden, (5) das Datum und die Uhrzeit eines Zugriffs auf die Internetseite, (6) eine Internet-Protokoll-Adresse (IP-Adresse), (7) der Internet-Service-Provider des zugreifenden Systems und (8) sonstige ähnliche Daten und Informationen, die der Gefahrenabwehr im Falle von Angriffen auf unsere informationstechnologischen Systeme dienen.
+Wenn Sie per E-Mail oder Telefon Kontakt aufnehmen, werden Ihre Angaben (etwa Name, Kontaktdaten und Ihr Anliegen) zur Bearbeitung Ihrer Anfrage und für die Terminvereinbarung verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO und, soweit Gesundheitsdaten betroffen sind, Art. 9 Abs. 2 lit. h DSGVO. Kommt keine Behandlung zustande, werden die Angaben gelöscht, sobald sie nicht mehr benötigt werden; für Behandlungsunterlagen gelten die gesetzlichen Aufbewahrungsfristen.
 
-Bei der Nutzung dieser allgemeinen Daten und Informationen zieht die Privatpraxis für Psychotherapie keine Rückschlüsse auf die betroffene Person. Diese Informationen werden vielmehr benötigt, um (1) die Inhalte unserer Internetseite korrekt auszuliefern, (2) die dauerhafte Funktionsfähigkeit unserer informationstechnologischen Systeme und der Technik unserer Internetseite zu gewährleisten sowie (3) um Strafverfolgungsbehörden im Falle eines Cyberangriffes die zur Strafverfolgung notwendigen Informationen bereitzustellen. Diese anonym erhobenen Daten und Informationen werden durch die Privatpraxis für Psychotherapie daher statistisch ausgewertet, mit dem Ziel, den Datenschutz und die Datensicherheit zu erhöhen. Die anonymen Daten der Server-Logfiles werden getrennt von allen durch eine betroffene Person angegebenen personenbezogenen Daten gespeichert.
+Bitte beachten Sie, dass eine gewöhnliche E-Mail unverschlüsselt übertragen wird. Nennen Sie darin deshalb nur kurz Ihr Anliegen; ausführliche Angaben zu Ihrer Gesundheit besprechen wir persönlich.
+
+<mark class="review">Zur Prüfung: Abschnitt neu.</mark>
+
+## Links zu anderen Internetseiten
+
+Diese Internetseite enthält Links zu anderen Anbietern (z. B. ResearchGate). Beim Anklicken verlassen Sie diese Internetseite; ab dann gilt die Datenschutzerklärung des jeweiligen Anbieters. Vor dem Klick werden keine Daten an diese Anbieter übertragen.
+
+<mark class="review">Zur Prüfung: Abschnitt neu.</mark>
+
+## Ihre Rechte
+
+Sie haben das Recht auf Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO), auf Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20) sowie das Recht, einer Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO zu widersprechen (Art. 21). Wenden Sie sich dazu an die oben genannten Kontaktdaten.
+
+Außerdem haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Zuständig ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg ([www.baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de)).
+
+<mark class="review">Zur Prüfung: Abschnitt neu. Die ganze Datenschutzerklärung sollte einmal rechtlich geprüft werden.</mark>
+
+Stand: September 2026

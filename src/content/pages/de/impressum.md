@@ -7,13 +7,21 @@ layout: legal
 ---
 
 **Angaben gemäß § 5 DDG**\
-Dr. Paul Bausch\
+Dr. phil. Paul Bausch\
+Praxis für Psychotherapie
+
+Standort Schopfheim\
+Steinhäußlerstr. 10\
+79650 Schopfheim\
+Deutschland
+
+Standort Freiburg\
 Bußstraße 17\
 79102 Freiburg\
 Deutschland
 
-Telefon: +49 (0)157 86444932\
-E-Mail: mail@psychotherapie-bausch.de
+E-Mail: mail@psychotherapie-bausch.de\
+Telefon: +49 (0)157 86444932
 
 **Gesetzliche Berufsbezeichnung**\
 Psychologischer Psychotherapeut, verliehen in Deutschland (Baden-Württemberg). Approbation durch das Regierungspräsidium Stuttgart, Fachkundenachweis für Verhaltenstherapie bei Erwachsenen.
@@ -22,10 +30,12 @@ Psychologischer Psychotherapeut, verliehen in Deutschland (Baden-Württemberg). 
 Landespsychotherapeutenkammer Baden-Württemberg (LPK Baden-Württemberg)
 
 **Zuständige Kassenärztliche Vereinigung**\
-KVBW, Arztregister LANR 8676995
+KVBW (für den Standort Schopfheim), Arztregister LANR 8676995
 
 **Berufsrechtliche Regelungen**\
-Das Berufsrecht ist, soweit keine anderen Regelungen durch die Kammer gültig sind, geregelt durch das Psychotherapeutengesetz (PsychThG) vom 1.1.1999 sowie durch das Gesetz über die Berufe der Psychologischen Psychotherapeuten und Kinder- und Jugendpsychotherapeuten.
+Es gelten das Psychotherapeutengesetz (PsychThG) und die Berufsordnung der Landespsychotherapeutenkammer Baden-Württemberg, einsehbar unter [www.lpk-bw.de](https://www.lpk-bw.de).
+
+<mark class="review">Zur Prüfung: Bisher stand hier das PsychThG „vom 1.1.1999“. Seit dem 1.9.2020 gilt das neue PsychThG, und die Berufsordnung der Kammer fehlte. Bitte bestätigen oder korrigieren.</mark>
 
 **Impressum | Haftungshinweis**\
 Dr. Paul Bausch, Diplom-Psychologe, Dr. phil. in Psychologie, Universität Freiburg, Psychologischer Psychotherapeut.
