@@ -47,7 +47,7 @@ The same code builds for the staging URL and for the custom domain. Two reposito
 
 | | `SITE_URL` | `BASE_PATH` |
 |---|---|---|
-| Staging | `https://metzelfetz.github.io` | `/psychotherapie-bausch/` |
+| Staging | `https://metzelfetz.github.io` | `/psychotherapie-bausch` |
 | Custom domain | `https://psychotherapie-bausch.de` | `/` (or leave unset) |
 
 Without them the build defaults to the custom domain (`astro.config.mjs`). Any build whose host is not `psychotherapie-bausch.de` marks every page `noindex`, so staging never shows up in search engines. Internal links go through `import.meta.env.BASE_URL`, so they work under both.
