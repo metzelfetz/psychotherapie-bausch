@@ -1,5 +1,7 @@
-@import "@fontsource-variable/newsreader/opsz.css";
-@import "@fontsource-variable/newsreader/opsz-italic.css";
+/* Newsreader without the optical-size axis: less than half the download of
+   the opsz files, which held back the first paint on phones (s5). */
+@import "@fontsource-variable/newsreader/wght.css";
+@import "@fontsource-variable/newsreader/wght-italic.css";
 @import "@fontsource-variable/source-sans-3/wght.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
