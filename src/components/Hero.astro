@@ -53,7 +53,7 @@ const leadInline = lead && title.trimEnd().endsWith(',');
     <div class="hero-media -order-1 md:order-none">
       {variant === 'portrait' ? (
         <div class="portrait-frame mx-auto w-full max-w-72 md:mr-0 md:ml-auto md:max-w-[26rem]">
-          <Image src={image} alt={imageAlt} widths={[320, 480, 640, 960]} sizes="(min-width: 768px) 26rem, 18rem" class="h-auto w-full" loading="eager" />
+          <Image src={image} alt={imageAlt} widths={[320, 480, 560, 640, 960]} sizes="(min-width: 768px) 26rem, 18rem" class="h-auto w-full" loading="eager" />
         </div>
       ) : (
         <div class="photo-frame">

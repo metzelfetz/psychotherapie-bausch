@@ -13,6 +13,9 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'ignore',
+  // The one stylesheet (about 10 KB gzipped) goes inline: an external file
+  // blocks the first paint on slow phones by a full round trip (s5).
+  build: { inlineStylesheets: 'always' },
   i18n: {
     defaultLocale: 'de',
     locales: ['de', 'en'],
