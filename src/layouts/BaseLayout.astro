@@ -12,13 +12,18 @@ interface Props {
   noindex?: boolean;
   /** URL of the same page in the other language, for hreflang and the switcher. */
   alternateUrl?: string;
+  /** schema.org data, rendered as a JSON-LD script in <head>. */
+  jsonLd?: object;
 }
 
-const { lang, title, description, noindex = false, alternateUrl } = Astro.props;
+const { lang, title, description, noindex = false, alternateUrl, jsonLd } = Astro.props;
 const tr = t(lang);
 const fullTitle = `${title} | Psychotherapie ${practice.name.replace('Dr. ', '')}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const otherLang: Lang = lang === 'de' ? 'en' : 'de';
+const alternate = alternateUrl && new URL(alternateUrl, Astro.site);
+// Visitors whose language is neither get the German page.
+const xDefault = lang === 'de' ? canonical : alternate;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 // Any build not for the real domain (the GitHub Pages staging URL) stays out
 // of search engines, so staging never competes with psychotherapie-bausch.de.
@@ -35,9 +40,8 @@ const isProduction = Astro.site?.hostname === 'psychotherapie-bausch.de';
     <link rel="canonical" href={canonical} />
     {(noindex || !isProduction) && <meta name="robots" content="noindex" />}
     <link rel="alternate" hreflang={lang} href={canonical} />
-    {alternateUrl && (
-      <link rel="alternate" hreflang={otherLang} href={new URL(alternateUrl, Astro.site)} />
-    )}
+    {alternate && <link rel="alternate" hreflang={otherLang} href={alternate} />}
+    {xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
     <link rel="icon" type="image/png" href={`${base}logo.png`} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
@@ -45,6 +49,7 @@ const isProduction = Astro.site?.hostname === 'psychotherapie-bausch.de';
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
     <meta name="generator" content={Astro.generator} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body class="min-h-screen flex flex-col bg-base-100 font-sans text-[1.1875rem] leading-[1.7] text-base-content">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:p-2 focus:bg-base-100">

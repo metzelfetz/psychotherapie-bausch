@@ -25,7 +25,7 @@ const linkClass = 'underline decoration-base-100/35 underline-offset-4 hover:dec
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
           {locations.map((l) => (
             <address class="not-italic leading-relaxed text-neutral-content">
-              <span class="font-semibold text-base-100">{tr('location.prefix')} {l.city}</span><br />
+              <span class="font-semibold text-base-100">{tr('location.title').replace('{city}', l.city)}</span><br />
               {l.street}<br />{l.postalCode} {l.city}
             </address>
           ))}

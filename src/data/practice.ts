@@ -10,6 +10,7 @@ export const practice = {
     en: 'Dr. phil. Paul Bausch · Psychological Psychotherapist',
   },
   country: { de: 'Deutschland', en: 'Germany' },
+  region: 'Baden-Württemberg',
   phone: {
     href: 'tel:+4915786444932',
     display: '+49 (0)157 86444932',
@@ -19,8 +20,8 @@ export const practice = {
 } as const;
 
 // The two practice locations, in Paul's order (his text of 2026-09-24).
-// Coordinates: the building's OSM centroid (Nominatim, looked up once), kept
-// for the JSON-LD (s4).
+// Coordinates: the building's OSM centroid (Nominatim, looked up once), used
+// by the JSON-LD (src/data/jsonld.ts).
 export const locations = [
   {
     id: 'schopfheim',
@@ -28,6 +29,8 @@ export const locations = [
     street: 'Steinhäußlerstr. 10',
     postalCode: '79650',
     days: { de: 'Montag bis Mittwoch', en: 'Monday to Wednesday' },
+    // The same days as schema.org day names, for the JSON-LD.
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday'],
     billing: {
       // Bold on the card: it applies to most patients (Paul, 2026-09-24).
       de: [{ text: 'Alle gesetzlichen Krankenkassen', strong: true }, 'Private Krankenversicherungen & Beihilfe', 'Selbstzahler'],
@@ -41,6 +44,7 @@ export const locations = [
     street: 'Bußstraße 17',
     postalCode: '79102',
     days: { de: 'Donnerstag und Freitag', en: 'Thursday and Friday' },
+    dayOfWeek: ['Thursday', 'Friday'],
     billing: {
       de: ['Private Krankenversicherungen & Beihilfe', 'Selbstzahler'],
       en: ['Private health insurance & Beihilfe', 'Self-payers'],

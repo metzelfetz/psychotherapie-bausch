@@ -1,0 +1,13 @@
+---
+import PageView from '../../components/PageView.astro';
+import { pagesFor, type Page } from '../../i18n/pages';
+
+export async function getStaticPaths() {
+  const pages = await pagesFor('en');
+  return pages.map((page) => ({ params: { slug: page.data.slug || undefined }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: Page };
+---
+
+<PageView page={page} />

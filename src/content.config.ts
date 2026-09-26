@@ -2,11 +2,15 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+// Entry ids keep the `<lang>/` path prefix that langOf() relies on; the glob
+// loader's default would use a frontmatter `slug` as the id instead.
+const idFromPath = ({ entry }: { entry: string }) => entry.replace(/\.md$/, '');
+
 // One Markdown file per page and language: src/content/pages/<lang>/<name>.md
 // Since s3 the home page is a one-pager: its frame (hero, contact box)
 // lives here, its body text in the `sections` collection below.
 const pages = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/pages', generateId: idFromPath }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -42,7 +46,7 @@ const pages = defineCollection({
 // The one-pager's sections: src/content/sections/<lang>/<name>.md, each an
 // `#anchor` on the home page below the hero.
 const sections = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/sections' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/sections', generateId: idFromPath }),
   schema: z.object({
     // Section heading (h2).
     title: z.string(),

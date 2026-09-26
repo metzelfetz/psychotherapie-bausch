@@ -8,6 +8,7 @@ import ContactCTA from './ContactCTA.astro';
 import CvTimeline from './CvTimeline.astro';
 import LocationCard from './LocationCard.astro';
 import { locations } from '../data/practice';
+import { practiceJsonLd } from '../data/jsonld';
 import { counterpart, langOf, sectionsFor, urlFor, type Page } from '../i18n/pages';
 import { t } from '../i18n/ui';
 
@@ -31,6 +32,7 @@ const sections = isHome
       (await sectionsFor(lang)).map(async (s) => ({ ...s.data, Content: (await render(s)).Content })),
     )
   : [];
+const jsonLd = isHome ? practiceJsonLd(lang, new URL(urlFor(lang, ''), Astro.site).toString()) : undefined;
 const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
 ---
 
@@ -40,6 +42,7 @@ const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
   description={page.data.description}
   noindex={layout === 'legal'}
   alternateUrl={alternateUrl}
+  jsonLd={jsonLd}
 >
   {hero && <Hero lang={lang} {...hero} />}
 
@@ -58,7 +61,7 @@ const locationById = Object.fromEntries(locations.map((l) => [l.id, l]));
         <section
           id={anchor}
           aria-labelledby={`${anchor}-title`}
-          class:list={['scroll-mt-16 px-4 py-14 md:scroll-mt-20 md:py-24', i % 2 === 0 ? 'bg-base-200' : 'bg-base-100']}
+          class:list={['scroll-mt-22 px-4 py-14 md:scroll-mt-24 md:py-24', i % 2 === 0 ? 'bg-base-200' : 'bg-base-100']}
         >
           <div class="mx-auto max-w-6xl">
             <Prose lead>
