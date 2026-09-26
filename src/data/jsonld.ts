@@ -50,7 +50,6 @@ export function practiceJsonLd({ lang, homeUrl, description, image, sameAs }: Op
         image,
         email: practice.email,
         telephone: practice.phone.href.replace('tel:', ''),
-        medicalSpecialty: 'Psychiatric',
         address: {
           '@type': 'PostalAddress',
           streetAddress: l.street,

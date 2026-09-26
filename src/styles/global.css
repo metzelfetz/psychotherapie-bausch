@@ -28,7 +28,7 @@
   --color-base-content: #2e2c28;     /* 12.6:1 */
   --color-secondary: #e9dfcb;        /* sand panels */
   --color-secondary-content: #4a5a3c; /* dark olive, 6.7:1 on base-100, 5.6:1 on sand */
-  --color-accent: #c9b58e;           /* deep sand, decoration only (3.8:1) */
+  --color-accent: #c9b58e;           /* deep sand, decoration only (1.8:1) */
   --color-accent-content: #2e2c28;
   --color-neutral: #2f3a2a;          /* deep olive footer; base-100 on it 10.8:1 */
   --color-neutral-content: #c9d1b8;  /* muted footer text, 7.6:1 on neutral */
@@ -43,7 +43,7 @@
 @theme {
   --font-sans: "Source Sans 3 Variable", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Newsreader Variable", Georgia, ui-serif, serif;
-  /* Muted body text, 5.2:1 on base-100. */
+  /* Muted body text, 5.1:1 on base-100. */
   --color-muted: #6b665c;
 }
 
