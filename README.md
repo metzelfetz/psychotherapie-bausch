@@ -29,7 +29,7 @@ The one-pager shows the sections in their `order`. A section appears in the head
 
 **Practice facts** – addresses, weekdays, billing options, phone, email, coordinates – live only in `src/data/practice.ts`. The location cards, the footer, the contact box and the search-engine data (JSON-LD) all read from there, so a new phone number or a changed billing option is one edit. Add a location there and give it a sentence in both `standorte`/`locations` files. The one exception: the four legal pages spell out the addresses, phone and email as plain text, so update them too when a fact changes.
 
-**Photo**: the portrait is `src/assets/Portrait_cutout.png` (a transparent cut-out). To swap it, replace the file or point `hero.image` in both home files at a new image in `src/assets/`, then run `node scripts/og-image.mjs` to redraw the link preview image (`public/og-image.jpg`).
+**Photo**: the portrait is `src/assets/Portrait_cutout.png` (a transparent cut-out, made on a Mac with `swift scripts/cutout.swift photo.jpg out.png`). To swap it, replace the file or point `hero.image` in both home files at a new image in `src/assets/`, then run `node scripts/og-image.mjs` to redraw the link preview image (`public/og-image.jpg`).
 
 ## Search engines and AI assistants
 
