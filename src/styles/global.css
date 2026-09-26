@@ -249,7 +249,7 @@
   text-underline-offset: 0.3em;
 }
 /* Legal text awaiting Paul's review (s4): a visible marker, removed once
-   he confirms. base-content on sand is 11.2:1. */
+   he confirms. base-content on sand is 10.5:1. */
 .prose mark.review {
   display: block;
   padding: 0.6rem 0.9rem;
